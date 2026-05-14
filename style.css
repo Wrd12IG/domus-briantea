@@ -890,98 +890,156 @@ section { padding: 100px 0; }
 .legal-body li { font-size: 0.88rem; color: var(--mid); line-height: 1.8; margin-bottom: 4px; }
 
 /* ─── DISPONIBILITÀ / GOOGLE CALENDAR ─── */
-#disponibilita { background: var(--ivory); }
+#disponibilita { background: var(--ivory); padding: 0; }
 
+/* ── Header strip (navy) ── */
+.cal-hero {
+  background: var(--navy);
+  padding: 80px 0 0;
+  overflow: hidden; position: relative;
+}
+.cal-hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, var(--brass), transparent);
+}
+.cal-hero-inner {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 40px; flex-wrap: wrap;
+  padding-bottom: 48px;
+}
+.cal-hero-text .cal-eyebrow {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--brass); margin-bottom: 16px;
+}
+.cal-hero-text .cal-big-title {
+  font-family: var(--font-serif); font-size: clamp(2.6rem, 4vw, 3.8rem);
+  font-weight: 300; color: white; line-height: 1.05; margin: 0;
+}
+.cal-hero-text .cal-big-title em { font-style: italic; color: var(--brass-light); }
+
+/* Process steps */
+.cal-steps {
+  display: flex; align-items: center; gap: 0; flex-shrink: 0;
+}
+.cal-step {
+  display: flex; flex-direction: column;
+  padding: 0 28px;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.cal-step:first-child { border-left: none; padding-left: 0; }
+.cal-step-num {
+  font-family: var(--font-serif); font-size: 2rem;
+  font-weight: 300; color: var(--brass); line-height: 1; margin-bottom: 4px;
+}
+.cal-step-label {
+  font-size: 0.63rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+  max-width: 100px; line-height: 1.4;
+}
+@media (max-width: 720px) { .cal-steps { display: none; } }
+
+/* ── Main layout ── */
 .cal-layout {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 48px;
-  align-items: start;
+  grid-template-columns: 1fr 360px;
+  gap: 0; align-items: start;
 }
-@media (max-width: 960px) {
-  .cal-layout { grid-template-columns: 1fr; }
-}
+@media (max-width: 960px) { .cal-layout { grid-template-columns: 1fr; } }
 
+.cal-main { padding: 48px 48px 48px 0; }
+@media (max-width: 960px) { .cal-main { padding: 40px 0; } }
+
+/* Calendar wrapper */
 .cal-wrapper {
   background: white;
-  border: 1px solid var(--light-border);
+  border-top: 3px solid var(--brass);
+  box-shadow: 0 4px 40px rgba(14,34,64,0.08);
   overflow: hidden;
-  position: relative;
 }
-.cal-wrapper::before {
-  content: 'Caricamento calendario...';
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-serif); font-size: 1rem;
-  color: var(--mid); background: white; z-index: 0;
+.cal-wrapper-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.cal-wrapper iframe {
-  display: block; width: 100%; border: none;
-  min-height: 500px; position: relative; z-index: 1;
+.cal-wrapper-title {
+  font-family: var(--font-serif); font-size: 0.88rem;
+  font-weight: 400; color: rgba(255,255,255,0.65); letter-spacing: 0.04em;
 }
-
-.cal-legend {
-  display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap;
-}
+.cal-legend { display: flex; gap: 16px; flex-wrap: wrap; }
 .cal-legend-item {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid);
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
 }
-.cal-dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-}
-.cal-dot--occupied { background: #c0392b; }
+.cal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cal-dot--occupied { background: #e05555; }
 .cal-dot--available { background: var(--brass); }
+.cal-wrapper iframe { display: block; width: 100%; border: none; min-height: 520px; }
 
-/* Request form panel */
+/* ── Right form panel ── */
 .cal-form-panel {
-  background: var(--sage);
-  padding: 40px 36px;
-  position: sticky; top: 100px;
+  background: var(--navy);
+  padding: 48px 36px;
+  position: sticky; top: 80px;
+  border-left: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column;
+}
+.cal-form-panel .form-eyebrow {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--brass); margin-bottom: 10px;
 }
 .cal-form-panel .form-title {
-  font-family: var(--font-serif); font-size: 1.6rem;
-  font-weight: 300; color: white; margin-bottom: 6px; line-height: 1.2;
+  font-family: var(--font-serif); font-size: 2rem;
+  font-weight: 300; color: white; line-height: 1.1; margin-bottom: 8px;
 }
+.cal-form-panel .form-title em { font-style: italic; color: var(--brass-light); }
 .cal-form-panel .form-sub {
-  font-size: 0.78rem; color: rgba(255,255,255,0.55);
-  margin-bottom: 28px; line-height: 1.6;
+  font-size: 0.76rem; color: rgba(255,255,255,0.38);
+  margin-bottom: 28px; line-height: 1.7;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .cal-field {
-  display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
+  display: flex; flex-direction: column; gap: 5px; margin-bottom: 13px;
 }
 .cal-field label {
-  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.32);
 }
 .cal-field input,
 .cal-field select,
 .cal-field textarea {
-  width: 100%; padding: 12px 16px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: white; font-family: var(--font-sans); font-size: 0.85rem;
-  outline: none; transition: border-color var(--transition);
-  -webkit-appearance: none;
+  width: 100%; padding: 11px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 0; border-bottom: 1px solid rgba(255,255,255,0.18);
+  color: white; font-family: var(--font-sans); font-size: 0.84rem;
+  outline: none; transition: border-color var(--transition), background var(--transition);
+  -webkit-appearance: none; border-radius: 0;
 }
-.cal-field input::placeholder,
-.cal-field textarea::placeholder { color: rgba(255,255,255,0.3); }
 .cal-field input:focus,
 .cal-field select:focus,
-.cal-field textarea:focus { border-color: var(--brass); }
-.cal-field select option { background: var(--navy); color: white; }
-.cal-field textarea { resize: vertical; min-height: 90px; }
-.cal-submit {
-  width: 100%; padding: 14px;
-  background: var(--brass); color: white;
-  font-family: var(--font-sans); font-size: 0.72rem;
-  font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  border: none; cursor: pointer;
-  transition: background var(--transition); margin-top: 8px;
+.cal-field textarea:focus {
+  border-bottom-color: var(--brass);
+  background: rgba(184,153,104,0.05);
 }
-.cal-submit:hover { background: var(--brass-light); }
+.cal-field input::placeholder, .cal-field textarea::placeholder { color: rgba(255,255,255,0.18); }
+.cal-field select option { background: var(--navy); color: white; }
+.cal-field textarea { resize: vertical; min-height: 68px; }
+.cal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cal-submit {
+  width: 100%; padding: 15px;
+  background: var(--brass); color: white;
+  font-family: var(--font-sans); font-size: 0.68rem;
+  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  border: none; cursor: pointer;
+  transition: background var(--transition), letter-spacing 0.3s;
+  margin-top: 10px;
+}
+.cal-submit:hover { background: var(--brass-light); letter-spacing: 0.22em; }
 .cal-note {
-  font-size: 0.7rem; color: rgba(255,255,255,0.35);
-  text-align: center; margin-top: 12px; line-height: 1.5;
+  font-size: 0.65rem; color: rgba(255,255,255,0.22);
+  text-align: center; margin-top: 14px; line-height: 1.6;
 }

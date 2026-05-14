@@ -210,40 +210,64 @@
 </section>
 
 <!-- ─── PERSONAS ─── -->
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     SEZIONE DISPONIBILITÀ — GOOGLE CALENDAR
-     ─────────────────────────────────────────────────────────────────────────
-     SETUP (5 minuti):
-     1. Vai su calendar.google.com → crea un calendario "Domus Briantea"
-     2. Impostazioni → Rendilo PUBBLICO
-     3. Impostazioni → "Integra calendario" → copia l'ID (formato: xxx@group.calendar.google.com)
-     4. Sostituisci YOUR_CALENDAR_ID nell'URL src dell'iframe qui sotto
-     5. Blocca i giorni OCCUPATI creando eventi nel calendario → appariranno in rosso
-     ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- ─── DISPONIBILITÀ ─── -->
 <section id="disponibilita">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="tag">Disponibilità in tempo reale</span>
-      <h2 class="section-title">Verifica le date libere</h2>
-      <div class="divider center"></div>
-      <p class="section-sub">Il calendario viene aggiornato in tempo reale. Consulta le date disponibili e invia una richiesta — risposta garantita entro 2 ore.</p>
-    </div>
 
-    <div class="cal-layout reveal">
-      <!-- ── CALENDAR ── -->
-      <div>
-        <div class="cal-wrapper" id="cal-wrapper">
+  <!-- Navy hero header strip -->
+  <div class="cal-hero">
+    <div class="container">
+      <div class="cal-hero-inner">
+        <div class="cal-hero-text">
+          <p class="cal-eyebrow">Disponibilità in tempo reale</p>
+          <h2 class="cal-big-title">Verifica le date<br><em>libere</em></h2>
+        </div>
+        <div class="cal-steps" aria-hidden="true">
+          <div class="cal-step">
+            <span class="cal-step-num">01</span>
+            <span class="cal-step-label">Consulta il calendario</span>
+          </div>
+          <div class="cal-step">
+            <span class="cal-step-num">02</span>
+            <span class="cal-step-label">Scegli le tue date</span>
+          </div>
+          <div class="cal-step">
+            <span class="cal-step-num">03</span>
+            <span class="cal-step-label">Invia la richiesta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar + Form grid -->
+  <div class="container">
+    <div class="cal-layout">
+
+      <!-- Left: Calendar -->
+      <div class="cal-main">
+        <div class="cal-wrapper">
+          <div class="cal-wrapper-bar">
+            <span class="cal-wrapper-title">Domus Briantea — Disponibilità</span>
+            <div class="cal-legend">
+              <span class="cal-legend-item"><span class="cal-dot cal-dot--occupied"></span>Occupato</span>
+              <span class="cal-legend-item"><span class="cal-dot cal-dot--available"></span>Disponibile</span>
+            </div>
+          </div>
           <!--
-            Sostituisci YOUR_CALENDAR_ID@group.calendar.google.com
-            con l'ID reale del tuo Google Calendar pubblico.
-            Puoi anche cambiare bgcolor (0E2240 = navy) e color (B89968 = ottone).
+            COME COLLEGARE IL TUO GOOGLE CALENDAR:
+            1. Vai su calendar.google.com
+            2. A sinistra: clicca sui 3 puntini accanto al tuo calendario → "Impostazioni e condivisione"
+            3. Scorri fino a "Integra calendario"
+            4. Copia il valore "Indirizzo calendario in formato iCal" — l'ID è la parte prima di ".ics"
+               (per gmail personale l'ID è la tua email, es: roberto@wrdigital.it)
+            5. Sostituisci YOUR_CALENDAR_ID qui sotto con il tuo ID (encode @ come %40)
+            6. Esempio: src=roberto%40wrdigital.it
           -->
           <iframe
             id="google-cal-iframe"
-            src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID%40group.calendar.google.com&ctz=Europe%2FRome&mode=MONTH&bgcolor=0E2240&color=B89968&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=it"
-            style="border:0"
+            src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID%40gmail.com&ctz=Europe%2FRome&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=it"
             width="100%"
-            height="520"
+            height="540"
             frameborder="0"
             scrolling="no"
             loading="lazy"
@@ -251,58 +275,62 @@
             aria-label="Calendario disponibilità appartamenti"
           ></iframe>
         </div>
-        <div class="cal-legend">
-          <div class="cal-legend-item"><div class="cal-dot cal-dot--occupied"></div>Occupato</div>
-          <div class="cal-legend-item"><div class="cal-dot cal-dot--available"></div>Disponibile</div>
-        </div>
       </div>
 
-      <!-- ── REQUEST FORM ── -->
+      <!-- Right: Request form -->
       <div class="cal-form-panel">
-        <h3 class="form-title">Richiedi<br>la tua data</h3>
-        <p class="form-sub">Compila il form. Nessun pagamento ora — solo una richiesta. Ti confermiamo la disponibilità entro 2 ore.</p>
-        <form id="booking-request-form" onsubmit="handleBookingRequest(event)">
+        <p class="form-eyebrow">Richiesta di prenotazione</p>
+        <h3 class="form-title">Prenota<br><em>la tua dimora</em></h3>
+        <p class="form-sub">Nessun pagamento ora. Compila il form e ti confermiamo la disponibilità entro 2 ore.</p>
+
+        <form id="booking-request-form" onsubmit="handleBookingRequest(event)" novalidate>
           <div class="cal-field">
             <label for="br-name">Nome e cognome</label>
-            <input type="text" id="br-name" name="nome" placeholder="Mario Rossi" required />
+            <input type="text" id="br-name" name="nome" placeholder="Mario Rossi" required autocomplete="name" />
+          </div>
+          <div class="cal-row">
+            <div class="cal-field">
+              <label for="br-email">Email</label>
+              <input type="email" id="br-email" name="email" placeholder="mario@email.com" required autocomplete="email" />
+            </div>
+            <div class="cal-field">
+              <label for="br-phone">Telefono</label>
+              <input type="tel" id="br-phone" name="telefono" placeholder="+39 333 …" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="cal-row">
+            <div class="cal-field">
+              <label for="br-checkin">Arrivo</label>
+              <input type="date" id="br-checkin" name="arrivo" required />
+            </div>
+            <div class="cal-field">
+              <label for="br-checkout">Partenza</label>
+              <input type="date" id="br-checkout" name="partenza" required />
+            </div>
           </div>
           <div class="cal-field">
-            <label for="br-email">Email</label>
-            <input type="email" id="br-email" name="email" placeholder="mario@email.com" required />
-          </div>
-          <div class="cal-field">
-            <label for="br-phone">Telefono (opzionale)</label>
-            <input type="tel" id="br-phone" name="telefono" placeholder="+39 333 000 0000" />
-          </div>
-          <div class="cal-field">
-            <label for="br-checkin">Data arrivo</label>
-            <input type="date" id="br-checkin" name="arrivo" required />
-          </div>
-          <div class="cal-field">
-            <label for="br-checkout">Data partenza</label>
-            <input type="date" id="br-checkout" name="partenza" required />
-          </div>
-          <div class="cal-field">
-            <label for="br-apt">Dimora preferita</label>
+            <label for="br-apt">Dimora</label>
             <select id="br-apt" name="dimora">
               <option value="">Qualsiasi disponibile</option>
-              <option value="aurelia">Dimora Aurelia — Bilocale</option>
-              <option value="selva">Dimora Selva — Monolocale</option>
-              <option value="lago">Dimora Lago — Trilocale</option>
+              <option value="aurelia">Dimora Aurelia — Bilocale 65mq</option>
+              <option value="selva">Dimora Selva — Monolocale 42mq</option>
+              <option value="lago">Dimora Lago — Trilocale 90mq</option>
             </select>
           </div>
           <div class="cal-field">
-            <label for="br-note">Note aggiuntive</label>
-            <textarea id="br-note" name="note" placeholder="Es. motivo del soggiorno, esigenze particolari..."></textarea>
+            <label for="br-note">Note</label>
+            <textarea id="br-note" name="note" placeholder="Motivo del soggiorno, esigenze particolari…"></textarea>
           </div>
           <button type="submit" class="cal-submit" id="booking-submit-btn">
             Invia richiesta →
           </button>
-          <p class="cal-note">I tuoi dati non vengono ceduti a terzi.<br>Prenotazione confermata solo dopo il tuo ok.</p>
+          <p class="cal-note">Nessun pagamento richiesto ora.<br>I tuoi dati non vengono ceduti a terzi.</p>
         </form>
       </div>
+
     </div>
   </div>
+
 </section>
 
 <section id="personas">
