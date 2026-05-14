@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termini di Servizio — Domus Briantea</title>
+  <meta name="description" content="Termini e condizioni di servizio di Domus Briantea. Politiche di prenotazione, cancellazione, check-in e utilizzo degli appartamenti." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav id="nav" role="navigation">
+  <a href="index.html" class="nav-logo">Domus Briantea</a>
+  <ul class="nav-links" id="nav-links"><li><a href="dimore.html">Le Dimore</a></li><li><a href="destinazioni.html">Destinazioni</a></li><li><a href="per-lavoro.html">Per chi viaggia</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="#" class="nav-cta" onclick="openModal()">Prenota</a></li></ul>
+  <div class="hamburger" id="hamburger" role="button" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+<div class="page-hero" style="padding:140px 0 60px;">
+  <div class="container"><div class="page-hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Termini di Servizio</span></nav>
+    <h1 class="page-hero-title" style="font-size:2.4rem;">Termini di Servizio</h1>
+    <p class="page-hero-sub">Condizioni generali di prenotazione e utilizzo degli appartamenti Domus Briantea</p>
+  </div></div>
+</div>
+<section style="background:var(--ivory);padding:80px 0;">
+  <div class="container">
+    <div class="legal-body">
+      <h2>1. Prenotazione</h2>
+      <p>La prenotazione si perfeziona con la conferma scritta da parte di Domus Briantea e il versamento della caparra confirmatoria (pari al 30% del totale del soggiorno). La richiesta di disponibilità non costituisce prenotazione confermata.</p>
+      <h2>2. Pagamento</h2>
+      <p>Il saldo del soggiorno è dovuto entro 7 giorni dall'arrivo o alla conferma, secondo quanto indicato nella comunicazione di prenotazione. Sono accettati: bonifico bancario, carta di credito/debito, PayPal. Il pagamento in contanti è accettato solo all'arrivo e nei limiti di legge.</p>
+      <h2>3. Cancellazione</h2>
+      <h3>Politica standard</h3>
+      <ul>
+        <li><strong>Cancellazione gratuita</strong> fino a 14 giorni prima dell'arrivo: rimborso integrale della caparra.</li>
+        <li><strong>Cancellazione tra 7 e 14 giorni prima</strong>: rimborso del 50% della caparra.</li>
+        <li><strong>Cancellazione entro 7 giorni</strong> o no-show: nessun rimborso della caparra.</li>
+      </ul>
+      <p>Per soggiorni superiori a 14 notti si applicano condizioni specifiche concordate al momento della prenotazione.</p>
+      <h2>4. Check-in e Check-out</h2>
+      <p>L'orario di check-in standard è dalle 15:00 alle 20:00. Orari diversi possono essere concordati con anticipo. Il check-out è previsto entro le 11:00. Il check-in tardivo (dopo le 20:00) deve essere comunicato almeno 24 ore prima.</p>
+      <h2>5. Utilizzo dell'appartamento</h2>
+      <ul>
+        <li>Il numero massimo di ospiti non può superare quello indicato nella prenotazione.</li>
+        <li>È vietato fumare all'interno degli appartamenti.</li>
+        <li>Gli animali domestici sono ammessi solo previo accordo esplicito.</li>
+        <li>L'ospite è responsabile dei danni causati durante il soggiorno. Un deposito cauzionale potrà essere richiesto al check-in.</li>
+        <li>Il rispetto del vicinato e degli orari di silenzio (22:00–8:00) è obbligatorio.</li>
+      </ul>
+      <h2>6. Obblighi di Legge</h2>
+      <p>Ai sensi del T.U.L.P.S., gli ospiti sono tenuti a esibire un documento d'identità valido al check-in. I dati vengono trasmessi alla Questura competente entro 24 ore dall'arrivo.</p>
+      <h2>7. Responsabilità</h2>
+      <p>Domus Briantea declina ogni responsabilità per furti, danni o eventi causati da forza maggiore. Gli appartamenti sono dotati di serrature di sicurezza; l'ospite è responsabile della custodia delle chiavi.</p>
+      <h2>8. Foro competente</h2>
+      <p>Per qualsiasi controversia è competente il Foro di Monza (MB), con applicazione del diritto italiano.</p>
+      <p style="margin-top:40px;font-size:0.8rem;color:var(--light-border);">Ultimo aggiornamento: Maggio 2025</p>
+    </div>
+  </div>
+</section>
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:40px;"><p class="footer-copy">© 2025 Domus Briantea</p><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="termini.html">Termini</a><a href="cookie.html">Cookie</a></div></div>
+  </div>
+</footer>
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" onclick="closeModalOutside(event)">
+  <div class="modal-box"><button class="modal-close" onclick="closeModal()">✕</button><h2 class="modal-title">Verifica disponibilità</h2><form class="modal-form" onsubmit="handleModal(event)"><div class="modal-row"><input type="date" id="m-checkin" required /><input type="date" id="m-checkout" required /></div><input type="email" placeholder="La tua email" required /><button type="submit" class="modal-btn" id="modal-submit-btn">Richiedi disponibilità →</button></form></div>
+</div>
+<script>
+  const nav=document.getElementById('nav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+  function openModal(){document.getElementById('modal-overlay').classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+  function closeModalOutside(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+  function handleModal(e){e.preventDefault();closeModal();}
+</script>
+</body></html>

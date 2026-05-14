@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutte le Dimore — Appartamenti a Seregno e Desio | Domus Briantea</title>
+  <meta name="description" content="Scopri tutte le dimore Domus Briantea: Dimora Aurelia (bilocale 65mq), Dimora Selva (monolocale 42mq) e Dimora Lago (trilocale 90mq). Prenota direttamente." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav id="nav" role="navigation">
+  <a href="index.html" class="nav-logo">Domus Briantea</a>
+  <ul class="nav-links" id="nav-links"><li><a href="dimore.html">Le Dimore</a></li><li><a href="destinazioni.html">Destinazioni</a></li><li><a href="per-lavoro.html">Per chi viaggia</a></li><li><a href="index.html#blog">Magazine</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="#" class="nav-cta" onclick="openModal()">Prenota</a></li></ul>
+  <div class="hamburger" id="hamburger" role="button" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Le Dimore</span></nav>
+      <span class="tag">La Collezione</span>
+      <h1 class="page-hero-title">Tre dimore.<br><em>Una sola promessa.</em></h1>
+      <p class="page-hero-sub">Ogni spazio è curato come se dovessimo abitarci noi. Materiali selezionati, luce studiata, silenzio garantito. Scegli la dimora più adatta al tuo soggiorno.</p>
+    </div>
+  </div>
+</div>
+
+<section style="background:var(--ivory);">
+  <div class="container">
+
+    <!-- DIMORA AURELIA -->
+    <div class="two-col reveal" style="margin-bottom:80px; padding-bottom:80px; border-bottom:1px solid var(--light-border);">
+      <div class="two-col-img">
+        <img src="hero_apartment.png" alt="Dimora Aurelia — soggiorno con luce naturale e vista sulla campagna" loading="lazy" />
+      </div>
+      <div>
+        <div class="apt-badge" style="position:static;display:inline-block;margin-bottom:16px;">In Evidenza</div>
+        <p class="apt-type">Bilocale · 65 mq · Seregno (MB)</p>
+        <h2 class="section-title" style="text-align:left;font-size:2.2rem;margin-bottom:16px;">Dimora Aurelia</h2>
+        <p style="font-size:0.9rem;color:var(--mid);line-height:1.8;margin-bottom:24px;">La nostra dimora di punta. Luce che entra da ogni prospettiva, soffitti alti, arredamento curato nei dettagli più piccoli. Una camera da letto, un soggiorno con divano letto, cucina completamente attrezzata. Vista sulla campagna brianzola.</p>
+        <div class="apt-chips" style="margin-bottom:24px;">
+          <span class="apt-chip">👥 1–2 ospiti</span><span class="apt-chip">🛏 1 camera</span><span class="apt-chip">📐 65 mq</span><span class="apt-chip">🚗 Parcheggio</span><span class="apt-chip">📶 Fibra 1Gbps</span><span class="apt-chip">❄️ Aria cond.</span><span class="apt-chip">🧺 Lavatrice</span><span class="apt-chip">🍳 Cucina piena</span>
+        </div>
+        <div class="hospital-list" style="margin-bottom:24px;">
+          <div class="hospital-item"><div class="hospital-name">Monza</div><div class="hospital-dist">10<span> min</span></div></div>
+          <div class="hospital-item"><div class="hospital-name">Milano Centrale</div><div class="hospital-dist">25<span> min</span></div></div>
+          <div class="hospital-item"><div class="hospital-name">Lago di Como</div><div class="hospital-dist">30<span> min</span></div></div>
+        </div>
+        <div class="apt-footer" style="padding-top:20px;border-top:1px solid var(--light-border);">
+          <div class="apt-price-block"><span class="apt-price-from">da</span><span class="apt-price">€120 <span>/ notte</span></span></div>
+          <button class="apt-cta" onclick="openModal()" id="cta-aurelia-page">Verifica disponibilità →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIMORA SELVA -->
+    <div class="two-col reveal" style="margin-bottom:80px; padding-bottom:80px; border-bottom:1px solid var(--light-border);">
+      <div>
+        <p class="apt-type">Monolocale · 42 mq · Seregno (MB)</p>
+        <h2 class="section-title" style="text-align:left;font-size:2.2rem;margin-bottom:16px;">Dimora Selva</h2>
+        <p style="font-size:0.9rem;color:var(--mid);line-height:1.8;margin-bottom:24px;">Compatta e perfetta. Pensata per chi viaggia da solo o in coppia e cerca un rifugio elegante senza sprechi. Materiali caldi — legno, lino, lana — e silenzio totale. Ideale per soggiorni di lavoro ricorrenti o degenze mediche brevi.</p>
+        <div class="apt-chips" style="margin-bottom:24px;">
+          <span class="apt-chip">👥 1–2 ospiti</span><span class="apt-chip">📐 42 mq</span><span class="apt-chip">🚗 Parcheggio</span><span class="apt-chip">📶 Fibra</span><span class="apt-chip">❄️ Aria cond.</span><span class="apt-chip">🍳 Cucina</span>
+        </div>
+        <div class="apt-footer" style="padding-top:20px;border-top:1px solid var(--light-border);">
+          <div class="apt-price-block"><span class="apt-price-from">da</span><span class="apt-price">€90 <span>/ notte</span></span></div>
+          <button class="apt-cta" onclick="openModal()" id="cta-selva-page">Verifica disponibilità →</button>
+        </div>
+      </div>
+      <div class="two-col-img">
+        <img src="bedroom_luxury.png" alt="Dimora Selva — camera da letto con arredi in legno e lino naturale" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- DIMORA LAGO -->
+    <div class="two-col reveal">
+      <div class="two-col-img">
+        <img src="apartment_kitchen.png" alt="Dimora Lago — cucina con ante verdi e top in marmo bianco" loading="lazy" />
+      </div>
+      <div>
+        <p class="apt-type">Trilocale · 90 mq · Desio (MB)</p>
+        <h2 class="section-title" style="text-align:left;font-size:2.2rem;margin-bottom:16px;">Dimora Lago</h2>
+        <p style="font-size:0.9rem;color:var(--mid);line-height:1.8;margin-bottom:24px;">La dimora più grande della collezione. Due camere da letto indipendenti, cucina con isola, sala pranzo separata. Ideale per famiglie, gruppi di colleghi o soggiorni medici con familiare al seguito. Due posti auto privati inclusi.</p>
+        <div class="apt-chips" style="margin-bottom:24px;">
+          <span class="apt-chip">👥 fino a 4 ospiti</span><span class="apt-chip">🛏 2 camere</span><span class="apt-chip">📐 90 mq</span><span class="apt-chip">🚗 2 posti auto</span><span class="apt-chip">📶 Fibra</span><span class="apt-chip">❄️ Aria cond.</span><span class="apt-chip">🧺 Lavatrice</span>
+        </div>
+        <div class="apt-footer" style="padding-top:20px;border-top:1px solid var(--light-border);">
+          <div class="apt-price-block"><span class="apt-price-from">da</span><span class="apt-price">€165 <span>/ notte</span></span></div>
+          <button class="apt-cta" onclick="openModal()" id="cta-lago-page">Verifica disponibilità →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><span style="font-family:var(--font-serif);font-size:1.6rem;color:white;display:block;margin-bottom:16px;">Domus Briantea</span><p style="font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.7;max-width:260px;">Boutique short stays nel cuore della Brianza.</p></div>
+      <div><p class="footer-col-title">Dimore</p><ul class="footer-links"><li><a href="dimore.html">Tutte le dimore</a></li></ul></div>
+      <div><p class="footer-col-title">Per chi viaggia</p><ul class="footer-links"><li><a href="per-lavoro.html">Per Lavoro</a></li><li><a href="per-cure-mediche.html">Cure Mediche</a></li><li><a href="per-eventi.html">Sport & Eventi</a></li><li><a href="per-turismo.html">Turismo</a></li></ul></div>
+      <div><p class="footer-col-title">Contatti</p><ul class="footer-links"><li><a href="mailto:info@domusbriantea.it">info@domusbriantea.it</a></li><li><a href="chi-siamo.html">Chi siamo</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2025 Domus Briantea</p><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="termini.html">Termini</a><a href="cookie.html">Cookie</a></div></div>
+  </div>
+</footer>
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" onclick="closeModalOutside(event)">
+  <div class="modal-box"><button class="modal-close" onclick="closeModal()">✕</button><h2 class="modal-title">Verifica disponibilità</h2><p class="modal-sub">Prenota direttamente con noi</p>
+    <form class="modal-form" onsubmit="handleModal(event)"><div class="modal-row"><input type="date" id="m-checkin" required /><input type="date" id="m-checkout" required /></div><select><option value="">Scegli la dimora</option><option>Dimora Aurelia</option><option>Dimora Selva</option><option>Dimora Lago</option></select><input type="email" placeholder="La tua email" required /><button type="submit" class="modal-btn" id="modal-submit-btn">Richiedi disponibilità →</button><p class="modal-note">Risposta entro <strong>2 ore</strong>.</p></form>
+  </div>
+</div>
+<script>
+  const nav=document.getElementById('nav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+  const obs=new IntersectionObserver(e=>{e.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*100);obs.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  function openModal(){document.getElementById('modal-overlay').classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+  function closeModalOutside(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+  function handleModal(e){e.preventDefault();const b=document.getElementById('modal-submit-btn');b.textContent='Richiesta inviata ✓';b.style.background='var(--sage)';setTimeout(()=>{closeModal();b.textContent='Richiedi disponibilità →';b.style.background='';},2200);}
+  document.querySelectorAll('input[type="date"]').forEach(i=>i.min=new Date().toISOString().split('T')[0]);
+</script>
+</body></html>

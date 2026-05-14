@@ -683,3 +683,153 @@ section { padding: 100px 0; }
   text-align: center; margin-top: 8px;
 }
 .modal-note strong { color: var(--brass); }
+
+/* ─── INNER PAGES ─── */
+.page-hero {
+  padding: 160px 0 80px;
+  background: var(--sage);
+  position: relative; overflow: hidden;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(184,153,104,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-hero-inner { position: relative; z-index: 1; max-width: 720px; }
+.page-hero .tag { color: var(--brass-light); }
+.page-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300; line-height: 1.1;
+  color: white; margin-bottom: 1.2rem;
+}
+.page-hero-title em { font-style: italic; color: var(--brass-light); }
+.page-hero-sub {
+  font-size: 1rem; color: rgba(255,255,255,0.72);
+  line-height: 1.75; max-width: 560px;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+  margin-bottom: 2rem;
+}
+.breadcrumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
+.breadcrumb a:hover { color: var(--brass-light); }
+.breadcrumb span { color: rgba(255,255,255,0.25); }
+
+/* ─── INFO GRID ─── */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-bottom: 80px;
+}
+@media (max-width: 900px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
+.info-card {
+  background: white; padding: 36px 32px;
+  border-bottom: 3px solid transparent;
+  transition: border-color var(--transition);
+}
+.info-card:hover { border-bottom-color: var(--brass); }
+.info-card-icon { font-size: 1.6rem; margin-bottom: 16px; }
+.info-card-title {
+  font-family: var(--font-serif); font-size: 1.15rem;
+  font-weight: 400; color: var(--charcoal); margin-bottom: 8px;
+}
+.info-card-text { font-size: 0.82rem; color: var(--mid); line-height: 1.7; }
+
+/* ─── HOSPITAL LIST ─── */
+.hospital-list { display: flex; flex-direction: column; gap: 0; }
+.hospital-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--light-border);
+  gap: 20px; flex-wrap: wrap;
+}
+.hospital-name {
+  font-family: var(--font-serif); font-size: 1.1rem;
+  font-weight: 400; color: var(--charcoal);
+}
+.hospital-spec { font-size: 0.78rem; color: var(--mid); margin-top: 3px; }
+.hospital-dist {
+  font-family: var(--font-serif); font-size: 1.6rem;
+  font-weight: 300; color: var(--brass); white-space: nowrap;
+}
+.hospital-dist span { font-family: var(--font-sans); font-size: 0.7rem; color: var(--mid); }
+
+/* ─── TWO COL LAYOUT ─── */
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+@media (max-width: 900px) { .two-col { grid-template-columns: 1fr; gap: 48px; } }
+.two-col-img { aspect-ratio: 4/5; overflow: hidden; }
+.two-col-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ─── HIGHLIGHT BOX ─── */
+.highlight-box {
+  background: var(--sage); color: white;
+  padding: 40px; margin: 48px 0;
+}
+.highlight-box-title {
+  font-family: var(--font-serif); font-size: 1.4rem;
+  font-weight: 400; margin-bottom: 12px; color: white;
+}
+.highlight-box p { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+.highlight-box .btn-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; padding: 12px 24px;
+  background: var(--brass); color: white;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none; border: none; cursor: pointer;
+  transition: background var(--transition);
+}
+.highlight-box .btn-light:hover { background: var(--brass-light); }
+
+/* ─── EVENT CARDS ─── */
+.events-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+}
+@media (max-width: 640px) { .events-grid { grid-template-columns: 1fr; } }
+.event-card { background: white; overflow: hidden; }
+.event-card-img { aspect-ratio: 16/9; overflow: hidden; }
+.event-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.event-card:hover .event-card-img img { transform: scale(1.04); }
+.event-card-body { padding: 24px; }
+.event-card-cat { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); margin-bottom: 8px; }
+.event-card-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; color: var(--charcoal); margin-bottom: 8px; }
+.event-card-text { font-size: 0.8rem; color: var(--mid); line-height: 1.6; }
+
+/* ─── DESTINATION CARDS ─── */
+.dest-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+}
+@media (max-width: 640px) { .dest-grid { grid-template-columns: 1fr; } }
+.dest-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
+.dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; display: block; }
+.dest-card:hover img { transform: scale(1.04); }
+.dest-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(30,26,20,0.7) 0%, transparent 50%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 28px;
+}
+.dest-city { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: white; }
+.dest-time { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass-light); margin-top: 4px; }
+
+/* ─── TEAM / CHI SIAMO ─── */
+.values-list { display: flex; flex-direction: column; gap: 24px; }
+.value-item { display: flex; gap: 20px; align-items: flex-start; }
+.value-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.value-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 500; color: var(--charcoal); margin-bottom: 4px; }
+.value-text { font-size: 0.82rem; color: var(--mid); line-height: 1.7; }
+
+/* ─── LEGAL PAGES ─── */
+.legal-body { max-width: 760px; margin: 0 auto; }
+.legal-body h2 { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; color: var(--charcoal); margin: 40px 0 12px; }
+.legal-body h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; color: var(--charcoal); margin: 28px 0 8px; }
+.legal-body p { font-size: 0.88rem; color: var(--mid); line-height: 1.8; margin-bottom: 12px; }
+.legal-body ul { padding-left: 20px; margin-bottom: 12px; }
+.legal-body li { font-size: 0.88rem; color: var(--mid); line-height: 1.8; margin-bottom: 4px; }
