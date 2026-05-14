@@ -8,6 +8,7 @@
   --brass: #B89968;
   --brass-light: #cdb280;
   --charcoal: #2C2C2C;
+  --navy: #0E2240;
   --mid: #6b6b6b;
   --light-border: #e8e2d9;
   --white-warm: #FEFCF9;
@@ -544,7 +545,7 @@ section { padding: 100px 0; }
 
 /* ─── CTA FINAL ─── */
 #contact-cta {
-  background: var(--charcoal);
+  background: var(--navy);
   padding: 100px 0; text-align: center;
 }
 #contact-cta .tag { color: var(--brass-light); }
@@ -584,8 +585,8 @@ section { padding: 100px 0; }
 
 /* ─── FOOTER ─── */
 #footer {
-  background: var(--charcoal);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.06);
   padding: 64px 0 40px;
 }
 .footer-grid {
