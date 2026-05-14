@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domus Briantea — Dimore d'Autore tra Milano e i Laghi</title>
+  <meta name="description" content="Luxury short stays nel cuore della Brianza. A 20 minuti da Milano, Como, Monza e Lecco. Appartamenti di pregio per chi viaggia per lavoro, cure mediche, eventi o turismo." />
+  <meta property="og:title" content="Domus Briantea — Dimore d'Autore tra Milano e i Laghi" />
+  <meta property="og:description" content="Boutique short stays in Brianza. Per business, cure mediche, eventi e turismo premium." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Domus Briantea",
+    "description": "Boutique short-stay apartments in Brianza, Lombardy, Italy",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Brianza",
+      "addressCountry": "IT"
+    },
+    "priceRange": "€€€",
+    "amenityFeature": ["WiFi","Parking","Concierge","Air Conditioning"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav" role="navigation" aria-label="Navigazione principale">
+  <a href="/" class="nav-logo" id="nav-logo">Domus Briantea</a>
+  <ul class="nav-links" id="nav-links" role="list">
+    <li><a href="#apartments">Le Dimore</a></li>
+    <li><a href="destinazioni.html">Destinazioni</a></li>
+    <li><a href="soggiorni.html">Per chi viaggia</a></li>
+    <li><a href="#blog">Magazine</a></li>
+    <li><a href="#contact-cta">Chi siamo</a></li>
+    <li><a href="#" class="nav-cta" id="nav-book-btn" onclick="openModal()">Prenota</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-lang" aria-label="Selezione lingua">
+    <a href="/" class="active">IT</a>
+    <a href="/en/">EN</a>
+    <a href="/de/">DE</a>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Boutique Short Stays · Brianza, Lombardia</p>
+    <h1 class="hero-title">Dimore d'autore<br><em>tra Milano e i Laghi</em></h1>
+    <p class="hero-sub">Luxury short stays nel cuore della Brianza. Per chi viaggia con esigenze diverse, ma con un'unica aspettativa: l'eccellenza.</p>
+    <div class="hero-search" role="search" aria-label="Ricerca disponibilità">
+      <input type="date" id="checkin" aria-label="Data check-in" placeholder="Check-in" />
+      <input type="date" id="checkout" aria-label="Data check-out" placeholder="Check-out" />
+      <select id="guests" aria-label="Numero ospiti">
+        <option value="">Ospiti</option>
+        <option value="1">1 ospite</option>
+        <option value="2">2 ospiti</option>
+        <option value="3">3 ospiti</option>
+        <option value="4">4 ospiti</option>
+        <option value="5">5+ ospiti</option>
+      </select>
+      <button class="hero-search-btn" id="search-btn" onclick="openModal()">Cerca →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DISTANCES ─── -->
+<div id="distances" aria-label="Distanze dalle principali città">
+  <div class="distances-inner">
+    <div class="dist-item">
+      <span class="dist-icon">🚂</span>
+      <div class="dist-info">
+        <span class="dist-city">Milano</span>
+        <span class="dist-time">25 <span class="dist-minutes">min</span></span>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🏎</span>
+      <div class="dist-info">
+        <span class="dist-city">Monza</span>
+        <span class="dist-time">10 <span class="dist-minutes">min</span></span>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🏔</span>
+      <div class="dist-info">
+        <span class="dist-city">Como</span>
+        <span class="dist-time">30 <span class="dist-minutes">min</span></span>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">⛵️</span>
+      <div class="dist-info">
+        <span class="dist-city">Lecco</span>
+        <span class="dist-time">25 <span class="dist-minutes">min</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── APARTMENTS ─── -->
+<section id="apartments">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Le Nostre Dimore</span>
+      <h2 class="section-title">Spazi pensati per chi non scende a compromessi</h2>
+      <div class="divider center"></div>
+      <p class="section-sub">Ogni appartamento è una scelta curatoriale. Materiali, luce, silenzio. Niente di superfluo, nulla che manchi.</p>
+    </div>
+    <div class="apt-grid reveal">
+
+      <!-- FEATURED: Dimora Aurelia -->
+      <div class="apt-card apt-card-featured" id="apt-aurelia" tabindex="0" aria-label="Dimora Aurelia">
+        <div class="apt-photo">
+          <img class="apt-img" src="hero_apartment.png" alt="Dimora Aurelia — soggiorno con vista sulla campagna brianzola" loading="lazy" />
+          <div class="apt-badge">In Evidenza</div>
+          <div class="apt-index">01</div>
+        </div>
+        <div class="apt-body">
+          <p class="apt-type">Bilocale · 65 mq · Seregno</p>
+          <h3 class="apt-name">Dimora Aurelia</h3>
+          <p class="apt-desc">Luce naturale che entra da ogni angolo, arredi in lino grezzo e pietra naturale. Cucina completamente attrezzata, silenzio garantito, vista sulle colline della Brianza. L'appartamento più richiesto della collezione.</p>
+          <div class="apt-chips">
+            <span class="apt-chip">👥 2 ospiti</span>
+            <span class="apt-chip">🛏 1 camera</span>
+            <span class="apt-chip">🚗 Parcheggio</span>
+            <span class="apt-chip">📶 Fibra</span>
+            <span class="apt-chip">❄️ Aria cond.</span>
+            <span class="apt-chip">🧺 Lavatrice</span>
+          </div>
+          <div class="apt-footer">
+            <div class="apt-price-block">
+              <span class="apt-price-from">da</span>
+              <span class="apt-price">€120 <span>/ notte</span></span>
+            </div>
+            <button class="apt-cta" onclick="openModal()" id="cta-aurelia">Verifica disponibilità →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMALL: Dimora Selva -->
+      <div class="apt-card apt-card-small" id="apt-selva" tabindex="0" aria-label="Dimora Selva">
+        <div class="apt-photo">
+          <img class="apt-img" src="bedroom_luxury.png" alt="Dimora Selva — camera da letto con arredi in legno e lino" loading="lazy" />
+          <div class="apt-index">02</div>
+        </div>
+        <div class="apt-body">
+          <p class="apt-type">Monolocale · 42 mq · Seregno</p>
+          <h3 class="apt-name">Dimora Selva</h3>
+          <div class="apt-chips">
+            <span class="apt-chip">👥 1–2 ospiti</span>
+            <span class="apt-chip">🚗 Parcheggio</span>
+            <span class="apt-chip">📶 Fibra</span>
+            <span class="apt-chip">❄️ Aria cond.</span>
+          </div>
+          <div class="apt-footer">
+            <div class="apt-price-block">
+              <span class="apt-price-from">da</span>
+              <span class="apt-price">€90 <span>/ notte</span></span>
+            </div>
+            <button class="apt-cta" onclick="openModal()" id="cta-selva">Disponibilità →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMALL: Dimora Lago -->
+      <div class="apt-card apt-card-small" id="apt-lago" tabindex="0" aria-label="Dimora Lago">
+        <div class="apt-photo">
+          <img class="apt-img" src="apartment_kitchen.png" alt="Dimora Lago — cucina con ante verdi e top in marmo" loading="lazy" />
+          <div class="apt-index">03</div>
+        </div>
+        <div class="apt-body">
+          <p class="apt-type">Trilocale · 90 mq · Desio</p>
+          <h3 class="apt-name">Dimora Lago</h3>
+          <div class="apt-chips">
+            <span class="apt-chip">👥 4 ospiti</span>
+            <span class="apt-chip">🛏 2 camere</span>
+            <span class="apt-chip">🚗 2 posti auto</span>
+            <span class="apt-chip">📶 Fibra</span>
+          </div>
+          <div class="apt-footer">
+            <div class="apt-price-block">
+              <span class="apt-price-from">da</span>
+              <span class="apt-price">€165 <span>/ notte</span></span>
+            </div>
+            <button class="apt-cta" onclick="openModal()" id="cta-lago">Disponibilità →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top:48px;" class="reveal">
+      <a href="dimore.html" id="all-apts-link" style="display:inline-flex;align-items:center;gap:10px;font-size:0.75rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);text-decoration:none;border-bottom:1px solid var(--sage);padding-bottom:4px;">
+        Vedi tutte le dimore →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PERSONAS ─── -->
+<section id="personas">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Per ogni ragione di viaggio</span>
+      <h2 class="section-title">Il soggiorno giusto, qualunque sia il tuo motivo</h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="personas-grid reveal">
+      <div class="persona-card" id="persona-lavoro">
+        <div class="persona-icon">💼</div>
+        <h3 class="persona-title">Per Lavoro</h3>
+        <p class="persona-desc">Silenzio, fibra ottica, parcheggio privato. Tutto ciò che serve a chi viaggia per business nell'area Milano–Monza.</p>
+        <a href="per-lavoro.html" class="persona-link" id="link-lavoro">Scopri →</a>
+      </div>
+      <div class="persona-card" id="persona-cure">
+        <div class="persona-icon">🏥</div>
+        <h3 class="persona-title">Cure Mediche</h3>
+        <p class="persona-desc">Vicini al San Gerardo, all'IEO e ad Humanitas. Check-in flessibile, soggiorni medi e lunghi, comfort domestico quando più conta.</p>
+        <a href="per-cure-mediche.html" class="persona-link" id="link-cure">Scopri →</a>
+      </div>
+      <div class="persona-card" id="persona-sport">
+        <div class="persona-icon">🏁</div>
+        <h3 class="persona-title">Sport ed Eventi</h3>
+        <p class="persona-desc">GP di Monza, Stadio Meazza, Reggia di Monza. A 10 minuti dall'Autodromo senza pagare i prezzi gonfiati dell'evento.</p>
+        <a href="per-eventi.html" class="persona-link" id="link-sport">Scopri →</a>
+      </div>
+      <div class="persona-card" id="persona-turismo">
+        <div class="persona-icon">🛶</div>
+        <h3 class="persona-title">Turismo Lago</h3>
+        <p class="persona-desc">Milano e Como in un'unica trasferta. La Brianza come base strategica per esplorare il nord Italia a prezzi umani.</p>
+        <a href="per-turismo.html" class="persona-link" id="link-turismo">Scopri →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PILLARS ─── -->
+<section id="pillars">
+  <div class="container">
+    <div class="pillars-layout">
+      <div class="pillars-img reveal">
+        <img src="lake_como_view.png" alt="Vista sul Lago di Como dalla Brianza" loading="lazy" />
+        <div class="pillars-img-badge">
+          <div class="badge-num">9.4</div>
+          <div class="badge-label">Valutazione media ospiti</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="tag">La nostra promessa</span>
+        <h2 class="section-title" style="text-align:left;">Cosa rende speciale soggiornare con noi</h2>
+        <div class="divider"></div>
+        <div class="pillar-list">
+          <div class="pillar-item">
+            <span class="pillar-num">01</span>
+            <div class="pillar-body">
+              <h3 class="pillar-name">Check-in dedicato, sempre</h3>
+              <p class="pillar-text">Nessun codice da ricercare. Una persona reale ti accoglie all'orario che preferisci, mostra la dimora e rimane disponibile durante tutto il soggiorno.</p>
+            </div>
+          </div>
+          <div class="pillar-item">
+            <span class="pillar-num">02</span>
+            <div class="pillar-body">
+              <h3 class="pillar-name">Qualità senza compromessi</h3>
+              <p class="pillar-text">Biancheria in lino, elettrodomestici premium, connessione fibra garantita. Ogni dettaglio è scelto come se fossimo noi gli ospiti.</p>
+            </div>
+          </div>
+          <div class="pillar-item">
+            <span class="pillar-num">03</span>
+            <div class="pillar-body">
+              <h3 class="pillar-name">Parcheggio privato incluso</h3>
+              <p class="pillar-text">Un vantaggio reale rispetto agli hotel di Milano e Como. Il tuo posto auto è garantito, non a pagamento e non da cercare.</p>
+            </div>
+          </div>
+          <div class="pillar-item">
+            <span class="pillar-num">04</span>
+            <div class="pillar-body">
+              <h3 class="pillar-name">Prenotazione diretta, prezzo migliore</h3>
+              <p class="pillar-text">Prenota con noi e risparmia fino al 10% rispetto a Booking.com. Lo stesso appartamento, lo stesso servizio, con più margine per entrambi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Recensioni</span>
+      <h2 class="section-title">Quello che dicono i nostri ospiti</h2>
+    </div>
+    <div class="testi-slider reveal" role="list">
+      <div class="testi-card" role="listitem">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Soggiorno di una settimana per cure al San Gerardo. Trovare un posto così curato, silenzioso e vicino all'ospedale è stato provvidenziale. La cucina attrezzata ha fatto la differenza."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">Marco T.</div>
+            <div class="testi-city">Torino · Soggiorno medico</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card" role="listitem">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Perfect base for GP Monza weekend. 10 minutes from the circuit, private parking, and the apartment was honestly better than any hotel in the area. Will be back next year."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">James K.</div>
+            <div class="testi-city">London · GP di Monza 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card" role="listitem">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Travelling weekly for work to Monza. This is now my permanent base. Better than any business hotel: faster WiFi, real kitchen, parking included. The host is a real professional."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div>
+            <div class="testi-name">Stefan H.</div>
+            <div class="testi-city">München · Business traveller</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BLOG ─── -->
+<section id="blog">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Magazine</span>
+      <h2 class="section-title">Guide, itinerari e consigli dalla Brianza</h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="blog-grid reveal">
+      <article class="blog-card" id="blog-monza" aria-label="Articolo GP Monza">
+        <div class="blog-img">
+          <img src="monza_autodromo.png" alt="Autodromo Nazionale di Monza — GP di Formula 1" loading="lazy" />
+        </div>
+        <p class="blog-cat">Sport & Eventi</p>
+        <h3 class="blog-title">GP di Monza: dove dormire vicino all'Autodromo senza spendere una fortuna</h3>
+        <p class="blog-excerpt">Durante il weekend del Gran Premio i prezzi degli hotel triplicano. Ecco perché un appartamento in Brianza è la scelta intelligente.</p>
+        <p class="blog-date">12 Maggio 2025</p>
+      </article>
+      <article class="blog-card" id="blog-milano" aria-label="Articolo Milano in un giorno">
+        <div class="blog-img">
+          <img src="milan_skyline.png" alt="Milano al tramonto, Duomo e skyline moderno" loading="lazy" />
+        </div>
+        <p class="blog-cat">Destinazioni</p>
+        <h3 class="blog-title">Come muoversi da Seregno a Milano: treno, auto e navetta a confronto</h3>
+        <p class="blog-excerpt">25 minuti di treno o 35 in auto? La guida pratica per raggiungere Milano dalla Brianza senza stress.</p>
+        <p class="blog-date">4 Maggio 2025</p>
+      </article>
+      <article class="blog-card" id="blog-lago" aria-label="Articolo Lago di Como">
+        <div class="blog-img">
+          <img src="lake_como_view.png" alt="Lago di Como al tramonto, borgo e montagna" loading="lazy" />
+        </div>
+        <p class="blog-cat">Turismo</p>
+        <h3 class="blog-title">Lago di Como vs Lago di Lecco: quale scegliere per un weekend in Brianza</h3>
+        <p class="blog-excerpt">Due laghi, due caratteri. Una guida onesta per scegliere in base al tuo stile di viaggio.</p>
+        <p class="blog-date">28 Aprile 2025</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section id="contact-cta" aria-label="Contatti e richiesta informazioni">
+  <div class="container">
+    <span class="tag">Parliamoci</span>
+    <h2 class="section-title">Hai esigenze particolari?<br>Troviamo insieme la dimora giusta.</h2>
+    <div class="divider center"></div>
+    <p class="section-sub" style="max-width:480px;margin:0 auto;">Che tu stia pianificando un soggiorno medico, un viaggio di lavoro ricorrente o un weekend speciale — scrivici. Rispondiamo entro 2 ore.</p>
+    <form class="cta-form" id="contact-form" onsubmit="handleForm(event)" novalidate>
+      <div class="cta-row">
+        <input type="text" id="form-name" placeholder="Nome e cognome" required aria-label="Nome e cognome" />
+        <input type="email" id="form-email" placeholder="Email" required aria-label="Email" />
+      </div>
+      <select id="form-reason" required aria-label="Motivo del soggiorno">
+        <option value="">Motivo del soggiorno</option>
+        <option value="lavoro">Lavoro / Business</option>
+        <option value="medico">Cure mediche</option>
+        <option value="sport">Sport / Evento</option>
+        <option value="turismo">Turismo / Vacanza</option>
+        <option value="altro">Altro</option>
+      </select>
+      <div class="cta-row">
+        <input type="date" id="form-checkin" aria-label="Data arrivo" placeholder="Arrivo" />
+        <input type="date" id="form-checkout" aria-label="Data partenza" placeholder="Partenza" />
+      </div>
+      <textarea id="form-message" placeholder="Raccontaci le tue esigenze..." aria-label="Messaggio"></textarea>
+      <button type="submit" class="btn-primary" id="submit-btn">Invia la richiesta</button>
+    </form>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">Domus Briantea</span>
+        <p>Boutique short stays nel cuore della Brianza. A 20 minuti da Milano, Como, Monza e Lecco.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Dimore</p>
+        <ul class="footer-links">
+          <li><a href="#" id="f-aurelia">Dimora Aurelia</a></li>
+          <li><a href="#" id="f-selva">Dimora Selva</a></li>
+          <li><a href="#" id="f-lago">Dimora Lago</a></li>
+          <li><a href="dimore.html" id="f-all">Tutte le dimore</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Per chi viaggia</p>
+        <ul class="footer-links">
+          <li><a href="per-lavoro.html" id="f-lavoro">Per Lavoro</a></li>
+          <li><a href="per-cure-mediche.html" id="f-medico">Cure Mediche</a></li>
+          <li><a href="per-eventi.html" id="f-eventi">Sport & Eventi</a></li>
+          <li><a href="per-turismo.html" id="f-turismo">Turismo</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contatti</p>
+        <ul class="footer-links">
+          <li><a href="mailto:info@domusbriantea.it" id="f-email">info@domusbriantea.it</a></li>
+          <li><a href="tel:+390362000000" id="f-phone">+39 0362 000 000</a></li>
+          <li><a href="#" id="f-whatsapp">WhatsApp</a></li>
+          <li><a href="chi-siamo.html" id="f-about">Chi siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Domus Briantea — P.IVA 00000000000</p>
+      <div class="footer-legal">
+        <a href="privacy.html" id="f-privacy">Privacy Policy</a>
+        <a href="termini.html" id="f-terms">Termini di Servizio</a>
+        <a href="cookie.html" id="f-cookie">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── BOOKING MODAL ─── -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Chiudi">✕</button>
+    <h2 class="modal-title" id="modal-title">Verifica disponibilità</h2>
+    <p class="modal-sub">Prenota direttamente con noi e risparmia il 10%</p>
+    <form class="modal-form" id="modal-form" onsubmit="handleModal(event)">
+      <div class="modal-row">
+        <input type="date" id="m-checkin" aria-label="Check-in" required />
+        <input type="date" id="m-checkout" aria-label="Check-out" required />
+      </div>
+      <select id="m-apt" aria-label="Appartamento" required>
+        <option value="">Scegli la dimora</option>
+        <option value="aurelia">Dimora Aurelia — Bilocale</option>
+        <option value="selva">Dimora Selva — Monolocale</option>
+        <option value="lago">Dimora Lago — Trilocale</option>
+      </select>
+      <select id="m-guests" aria-label="Ospiti">
+        <option value="1">1 ospite</option>
+        <option value="2">2 ospiti</option>
+        <option value="3">3 ospiti</option>
+        <option value="4">4+ ospiti</option>
+      </select>
+      <input type="email" id="m-email" placeholder="La tua email" required aria-label="Email" />
+      <button type="submit" class="modal-btn" id="modal-submit-btn">Richiedi disponibilità →</button>
+      <p class="modal-note">Risposta garantita entro <strong>2 ore</strong>. Nessun pagamento ora.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ─── NAV SCROLL ───
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ─── HAMBURGER ───
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  hamburger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
+
+  // ─── SCROLL REVEAL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ─── MODAL ───
+  function openModal() {
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Pre-fill dates if entered in hero
+    const ci = document.getElementById('checkin').value;
+    const co = document.getElementById('checkout').value;
+    if (ci) document.getElementById('m-checkin').value = ci;
+    if (co) document.getElementById('m-checkout').value = co;
+  }
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function handleModal(e) {
+    e.preventDefault();
+    const btn = document.getElementById('modal-submit-btn');
+    btn.textContent = 'Richiesta inviata ✓';
+    btn.style.background = 'var(--sage)';
+    setTimeout(() => { closeModal(); btn.textContent = 'Richiedi disponibilità →'; btn.style.background = ''; }, 2200);
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Messaggio inviato ✓';
+    btn.style.background = 'var(--sage)';
+    setTimeout(() => { btn.textContent = 'Invia la richiesta'; btn.style.background = ''; }, 3000);
+  }
+
+  // ─── SET MIN DATES ───
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(input => { input.min = today; });
+</script>
+</body>
+</html>
