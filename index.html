@@ -224,15 +224,15 @@
         <div class="cal-steps" aria-hidden="true">
           <div class="cal-step">
             <span class="cal-step-num">01</span>
-            <span class="cal-step-label">Consulta il calendario</span>
+            <span class="cal-step-label">Scegli la data libera</span>
           </div>
           <div class="cal-step">
             <span class="cal-step-num">02</span>
-            <span class="cal-step-label">Scegli le tue date</span>
+            <span class="cal-step-label">Seleziona il tuo slot</span>
           </div>
           <div class="cal-step">
             <span class="cal-step-num">03</span>
-            <span class="cal-step-label">Invia la richiesta</span>
+            <span class="cal-step-label">Conferma la prenotazione</span>
           </div>
         </div>
       </div>
@@ -247,10 +247,9 @@
       <div class="cal-main">
         <div class="cal-wrapper">
           <div class="cal-wrapper-bar">
-            <span class="cal-wrapper-title">Domus Briantea — Disponibilità</span>
+            <span class="cal-wrapper-title">Domus Briantea — Prenota uno slot</span>
             <div class="cal-legend">
-              <span class="cal-legend-item"><span class="cal-dot cal-dot--occupied"></span>Occupato</span>
-              <span class="cal-legend-item"><span class="cal-dot cal-dot--available"></span>Disponibile</span>
+              <span class="cal-legend-item" style="color:rgba(255,255,255,0.5);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;">Prenotazione diretta — nessuna email necessaria</span>
             </div>
           </div>
           <!--
@@ -263,19 +262,26 @@
             5. Sostituisci YOUR_CALENDAR_ID qui sotto con il tuo ID (encode @ come %40)
             6. Esempio: src=roberto%40wrdigital.it
           -->
-          <iframe
+                    <iframe
             id="google-cal-iframe"
-            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FRome&showTitle=0&title=Domus%20Briantea&showPrint=0&showCalendars=0&showTabs=0&showNav=1&hl=it&src=cm9iZXJ0b0B3cmRpZ2l0YWwuaXQ&color=%23e4c441"
+            src="https://calendar.app.google/KUPr3DRowDC96Dma9"
             style="border:0"
             width="100%"
-            height="540"
+            height="600"
             frameborder="0"
             scrolling="no"
             loading="lazy"
-            title="Calendario disponibilità Domus Briantea"
-            aria-label="Calendario disponibilità appartamenti"
+            title="Prenota un soggiorno — Domus Briantea"
+            aria-label="Calendario prenotazione appartamenti Domus Briantea"
           ></iframe>
         </div>
+        <p style="text-align:center;margin-top:14px;font-size:0.7rem;color:var(--mid);">
+          Problemi con il calendario?
+          <a href="https://calendar.app.google/KUPr3DRowDC96Dma9" target="_blank" rel="noopener"
+             style="color:var(--brass);font-weight:600;text-decoration:none;">
+            Apri in una nuova finestra →
+          </a>
+        </p>
       </div>
 
       <!-- Right: Request form -->
