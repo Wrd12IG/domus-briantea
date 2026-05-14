@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js">  lucide.createIcons();
 </script>
   <script type="application/ld+json">
@@ -244,46 +243,52 @@
   <div class="container">
     <div class="cal-layout">
 
-      <!-- Left: Booking card -->
+      <!-- Left: Custom Luxury Calendar -->
       <div class="cal-main">
-        <div class="cal-booking-card">
 
-          <p class="cal-booking-eyebrow">Prenotazione in tempo reale</p>
-          <h3 class="cal-booking-title">Scegli la tua data<br><em>con un click</em></h3>
-          <p class="cal-booking-desc">Visualizza direttamente gli slot disponibili e prenota in pochi secondi. Conferma immediata da Google Calendar — zero attese, zero email.</p>
-
-          <div class="cal-booking-features">
-            <div class="cal-booking-feat">
-              <i data-lucide="check-circle"></i>
-              <span>Conferma immediata</span>
-            </div>
-            <div class="cal-booking-feat">
-              <i data-lucide="calendar-check"></i>
-              <span>Slot in tempo reale</span>
-            </div>
-            <div class="cal-booking-feat">
-              <i data-lucide="shield-check"></i>
-              <span>Nessun pagamento ora</span>
-            </div>
-            <div class="cal-booking-feat">
-              <i data-lucide="mail-check"></i>
-              <span>Notifica via email</span>
-            </div>
+        <!-- Month navigation toolbar -->
+        <div class="cal-custom-wrap">
+          <div class="cal-custom-toolbar">
+            <button class="cal-nav-btn" onclick="calPrevMonth()" aria-label="Mese precedente">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <span class="cal-custom-toolbar-title">Seleziona le date del soggiorno</span>
+            <button class="cal-nav-btn" onclick="calNextMonth()" aria-label="Mese successivo">
+              <i data-lucide="chevron-right"></i>
+            </button>
           </div>
 
-          <div class="cal-booking-divider"></div>
+          <!-- Two-month grid rendered by JS -->
+          <div class="cal-months-grid" id="luxury-calendar" role="application" aria-label="Seleziona date soggiorno"></div>
 
-          <!-- Google Calendar scheduling button renders here -->
-          <div class="cal-gcal-btn-wrapper">
-            <div id="gcal-btn-target"></div>
+          <!-- Legend -->
+          <div class="cal-legend-row">
+            <span class="cal-legend-item">
+              <span class="cal-dot" style="background:#e05555;"></span>Occupato
+            </span>
+            <span class="cal-legend-item">
+              <span class="cal-dot" style="background:var(--brass);"></span>Disponibile
+            </span>
+            <span class="cal-legend-item">
+              <span class="cal-dot" style="background:var(--sage);"></span>Selezionato
+            </span>
           </div>
-
-          <p class="cal-booking-note">
-            Per soggiorni oltre 14 notti o richieste personalizzate usa il form a fianco<br>
-            oppure scrivi a <a href="mailto:info@domusbriantea.it">info@domusbriantea.it</a>
-          </p>
-
         </div>
+
+        <!-- Selection summary bar -->
+        <div class="cal-selection-bar" id="cal-selection-bar">
+          <div class="cal-sel-date">
+            <span class="cal-sel-label">Check-in</span>
+            <span class="cal-sel-val" id="cal-sel-start">—</span>
+          </div>
+          <div class="cal-sel-sep"><i data-lucide="arrow-right"></i></div>
+          <div class="cal-sel-date">
+            <span class="cal-sel-label">Check-out</span>
+            <span class="cal-sel-val" id="cal-sel-end">—</span>
+          </div>
+          <span class="cal-sel-nights" id="cal-sel-nights"></span>
+        </div>
+
       </div>
 
       <!-- Right: Request form -->
@@ -310,13 +315,18 @@
           <div class="cal-row">
             <div class="cal-field">
               <label for="br-checkin">Arrivo</label>
-              <input type="date" id="br-checkin" name="arrivo" required />
+              <input type="date" id="br-checkin" name="arrivo" required readonly
+                     style="cursor:not-allowed;opacity:0.6;" title="Seleziona dal calendario" />
             </div>
             <div class="cal-field">
               <label for="br-checkout">Partenza</label>
-              <input type="date" id="br-checkout" name="partenza" required />
+              <input type="date" id="br-checkout" name="partenza" required readonly
+                     style="cursor:not-allowed;opacity:0.6;" title="Seleziona dal calendario" />
             </div>
           </div>
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:-8px;margin-bottom:8px;">
+            ← Seleziona le date dal calendario a sinistra
+          </p>
           <div class="cal-field">
             <label for="br-apt">Dimora</label>
             <select id="br-apt" name="dimora">
@@ -694,9 +704,6 @@
   const today = new Date().toISOString().split('T')[0];
   document.querySelectorAll('input[type="date"]').forEach(input => { input.min = today; });
 </script>
-
-  <!-- Google Calendar Appointment Scheduling -->
-  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
   <script>
   (function() {
     window.addEventListener('load', function() {
@@ -712,5 +719,185 @@
   })();
   </script>
 
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       DOMUS BRIANTEA — CUSTOM AVAILABILITY CALENDAR
+       ───────────────────────────────────────────────────────────────────────
+       COME GESTIRE LE DISPONIBILITÀ:
+       Aggiungi i periodi OCCUPATI nell'array OCCUPIED_RANGES qui sotto.
+       Formato: ['YYYY-MM-DD', 'YYYY-MM-DD']  (da → a, estremi inclusi)
+
+       Esempio:
+         ['2025-06-01', '2025-06-07'],    // Aurelia: settimana 1–7 giugno
+         ['2025-07-15', '2025-07-22'],    // Selva: 15–22 luglio
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <script>
+  // ─── PERIODI OCCUPATI — modifica qui ────────────────────────────────────
+  const OCCUPIED_RANGES = [
+    // ['2025-06-01', '2025-06-07'],
+    // ['2025-07-15', '2025-07-22'],
+  ];
+  // ────────────────────────────────────────────────────────────────────────
+
+  (function() {
+    const MONTHS_IT = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
+                       'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+    const DAYS_IT   = ['Lu','Ma','Me','Gi','Ve','Sa','Do'];
+
+    function expandRanges(ranges) {
+      const s = new Set();
+      ranges.forEach(([a, b]) => {
+        let d = new Date(a + 'T00:00:00');
+        const e = new Date(b + 'T00:00:00');
+        while (d <= e) { s.add(d.toISOString().slice(0,10)); d.setDate(d.getDate()+1); }
+      });
+      return s;
+    }
+
+    let occupied   = expandRanges(OCCUPIED_RANGES);
+    let selStart   = null, selEnd = null, hover = null;
+    const today    = new Date(); today.setHours(0,0,0,0);
+    let vYear      = today.getFullYear();
+    let vMonth     = today.getMonth();
+
+    function fmt(dateStr) {
+      if (!dateStr) return '—';
+      const [y,m,d] = dateStr.split('-');
+      return d + ' ' + MONTHS_IT[+m-1].slice(0,3) + ' ' + y;
+    }
+
+    function nightsBetween(a, b) {
+      if (!a || !b) return 0;
+      return Math.round((new Date(b) - new Date(a)) / 86400000);
+    }
+
+    function hasOccupiedBetween(a, b) {
+      let d = new Date(a + 'T00:00:00'); d.setDate(d.getDate()+1);
+      const e = new Date(b + 'T00:00:00');
+      while (d < e) {
+        if (occupied.has(d.toISOString().slice(0,10))) return true;
+        d.setDate(d.getDate()+1);
+      }
+      return false;
+    }
+
+    function updateSummary() {
+      const s = document.getElementById('cal-sel-start');
+      const e = document.getElementById('cal-sel-end');
+      const n = document.getElementById('cal-sel-nights');
+      const bar = document.getElementById('cal-selection-bar');
+      if (s) s.textContent = fmt(selStart);
+      if (e) e.textContent = fmt(selEnd);
+      const nights = nightsBetween(selStart, selEnd);
+      if (n) n.textContent = nights > 0 ? nights + (nights === 1 ? ' notte' : ' notti') : '';
+      if (bar) bar.classList.toggle('cal-selection-bar--active', !!(selStart || selEnd));
+      // Update form hidden inputs
+      const ci = document.getElementById('br-checkin');
+      const co = document.getElementById('br-checkout');
+      if (ci) ci.value = selStart || '';
+      if (co) co.value = selEnd   || '';
+    }
+
+    function selectDate(dateStr) {
+      if (!selStart || (selStart && selEnd)) {
+        selStart = dateStr; selEnd = null;
+      } else {
+        if (dateStr <= selStart) { selStart = dateStr; selEnd = null; }
+        else if (hasOccupiedBetween(selStart, dateStr)) { selStart = dateStr; selEnd = null; }
+        else { selEnd = dateStr; }
+      }
+      hover = null;
+      updateSummary();
+      render();
+    }
+
+    function renderMonth(year, month) {
+      const wrap = document.createElement('div');
+      wrap.className = 'cal-month';
+
+      // Header
+      const hdr = document.createElement('div');
+      hdr.className = 'cal-month-header';
+      hdr.innerHTML = '<span class="cal-month-name">' + MONTHS_IT[month] +
+                      ' <em>' + year + '</em></span>';
+      wrap.appendChild(hdr);
+
+      // Day labels
+      const lbls = document.createElement('div');
+      lbls.className = 'cal-day-labels';
+      DAYS_IT.forEach(d => { const s=document.createElement('span'); s.textContent=d; lbls.appendChild(s); });
+      wrap.appendChild(lbls);
+
+      // Grid
+      const grid = document.createElement('div');
+      grid.className = 'cal-days-grid';
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const offset   = firstDay === 0 ? 6 : firstDay - 1;
+      const total    = new Date(year, month+1, 0).getDate();
+
+      for (let i=0; i<offset; i++) {
+        const e = document.createElement('div'); e.className='cal-day cal-day--empty'; grid.appendChild(e);
+      }
+
+      for (let d=1; d<=total; d++) {
+        const date    = new Date(year, month, d);
+        const ds      = date.toISOString().slice(0,10);
+        const isPast  = date < today;
+        const isOcc   = occupied.has(ds);
+        const isToday = date.getTime() === today.getTime();
+        const isStart = selStart === ds;
+        const isEnd   = selEnd   === ds;
+        const inRange = selStart && selEnd && ds > selStart && ds < selEnd;
+        const inHover = selStart && !selEnd && hover && ds > selStart && ds <= hover;
+
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.textContent = d; btn.dataset.date = ds;
+        const cls = ['cal-day'];
+        if (isPast)   cls.push('cal-day--past');
+        if (isOcc)    cls.push('cal-day--occupied');
+        if (isToday)  cls.push('cal-day--today');
+        if (isStart)  cls.push('cal-day--start');
+        if (isEnd)    cls.push('cal-day--end');
+        if (inRange)  cls.push('cal-day--in-range');
+        if (inHover)  cls.push('cal-day--hover-range');
+        btn.className = cls.join(' ');
+
+        if (!isPast && !isOcc) {
+          btn.addEventListener('click',      () => selectDate(ds));
+          btn.addEventListener('mouseenter', () => { hover = ds; render(); });
+          btn.addEventListener('mouseleave', () => { hover = null; render(); });
+          btn.setAttribute('aria-label', ds);
+        } else {
+          btn.disabled = true;
+        }
+        grid.appendChild(btn);
+      }
+      wrap.appendChild(grid);
+      return wrap;
+    }
+
+    function render() {
+      const c = document.getElementById('luxury-calendar');
+      if (!c) return;
+      c.innerHTML = '';
+      for (let i=0; i<2; i++) {
+        const m = (vMonth + i) % 12;
+        const y = vYear + Math.floor((vMonth + i) / 12);
+        c.appendChild(renderMonth(y, m));
+      }
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    window.calPrevMonth = function() {
+      vMonth--; if (vMonth < 0) { vMonth=11; vYear--; } render();
+    };
+    window.calNextMonth = function() {
+      vMonth++; if (vMonth > 11) { vMonth=0; vYear++; } render();
+    };
+
+    window.addEventListener('DOMContentLoaded', function() { render(); updateSummary(); });
+  })();
+  </script>
 </body>
 </html>
