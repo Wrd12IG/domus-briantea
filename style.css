@@ -685,6 +685,60 @@ section { padding: 100px 0; }
 }
 .modal-note strong { color: var(--brass); }
 
+/* ─── LUCIDE ICONS ─── */
+.lucide {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Distance bar */
+.dist-icon .lucide {
+  width: 22px; height: 22px;
+  opacity: 0.65;
+}
+
+/* Persona cards */
+.persona-icon .lucide {
+  width: 28px; height: 28px;
+  color: var(--brass);
+}
+
+/* Info cards (per-lavoro, per-cure, etc.) */
+.info-card-icon .lucide {
+  width: 28px; height: 28px;
+  color: var(--sage);
+}
+
+/* Apartment amenity chips */
+.apt-chip .lucide {
+  width: 13px; height: 13px;
+  vertical-align: middle;
+  margin-right: 3px;
+  position: relative; top: -1px;
+}
+
+/* Values list (chi-siamo) */
+.value-icon .lucide {
+  width: 24px; height: 24px;
+  color: var(--brass);
+}
+
+/* Hospital / distance list */
+.hospital-item .lucide {
+  width: 18px; height: 18px;
+  opacity: 0.5;
+}
+
+/* Event cards */
+.event-card-cat .lucide {
+  width: 12px; height: 12px;
+  vertical-align: middle;
+}
+
 /* ─── INNER PAGES ─── */
 .page-hero {
   padding: 160px 0 80px;
