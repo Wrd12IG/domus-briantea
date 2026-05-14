@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="style.css" />
+  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js">  lucide.createIcons();
 </script>
   <script type="application/ld+json">
@@ -243,45 +244,46 @@
   <div class="container">
     <div class="cal-layout">
 
-      <!-- Left: Calendar -->
+      <!-- Left: Booking card -->
       <div class="cal-main">
-        <div class="cal-wrapper">
-          <div class="cal-wrapper-bar">
-            <span class="cal-wrapper-title">Domus Briantea — Prenota uno slot</span>
-            <div class="cal-legend">
-              <span class="cal-legend-item" style="color:rgba(255,255,255,0.5);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;">Prenotazione diretta — nessuna email necessaria</span>
+        <div class="cal-booking-card">
+
+          <p class="cal-booking-eyebrow">Prenotazione in tempo reale</p>
+          <h3 class="cal-booking-title">Scegli la tua data<br><em>con un click</em></h3>
+          <p class="cal-booking-desc">Visualizza direttamente gli slot disponibili e prenota in pochi secondi. Conferma immediata da Google Calendar — zero attese, zero email.</p>
+
+          <div class="cal-booking-features">
+            <div class="cal-booking-feat">
+              <i data-lucide="check-circle"></i>
+              <span>Conferma immediata</span>
+            </div>
+            <div class="cal-booking-feat">
+              <i data-lucide="calendar-check"></i>
+              <span>Slot in tempo reale</span>
+            </div>
+            <div class="cal-booking-feat">
+              <i data-lucide="shield-check"></i>
+              <span>Nessun pagamento ora</span>
+            </div>
+            <div class="cal-booking-feat">
+              <i data-lucide="mail-check"></i>
+              <span>Notifica via email</span>
             </div>
           </div>
-          <!--
-            COME COLLEGARE IL TUO GOOGLE CALENDAR:
-            1. Vai su calendar.google.com
-            2. A sinistra: clicca sui 3 puntini accanto al tuo calendario → "Impostazioni e condivisione"
-            3. Scorri fino a "Integra calendario"
-            4. Copia il valore "Indirizzo calendario in formato iCal" — l'ID è la parte prima di ".ics"
-               (per gmail personale l'ID è la tua email, es: roberto@wrdigital.it)
-            5. Sostituisci YOUR_CALENDAR_ID qui sotto con il tuo ID (encode @ come %40)
-            6. Esempio: src=roberto%40wrdigital.it
-          -->
-                    <iframe
-            id="google-cal-iframe"
-            src="https://calendar.app.google/KUPr3DRowDC96Dma9"
-            style="border:0"
-            width="100%"
-            height="600"
-            frameborder="0"
-            scrolling="no"
-            loading="lazy"
-            title="Prenota un soggiorno — Domus Briantea"
-            aria-label="Calendario prenotazione appartamenti Domus Briantea"
-          ></iframe>
+
+          <div class="cal-booking-divider"></div>
+
+          <!-- Google Calendar scheduling button renders here -->
+          <div class="cal-gcal-btn-wrapper">
+            <div id="gcal-btn-target"></div>
+          </div>
+
+          <p class="cal-booking-note">
+            Per soggiorni oltre 14 notti o richieste personalizzate usa il form a fianco<br>
+            oppure scrivi a <a href="mailto:info@domusbriantea.it">info@domusbriantea.it</a>
+          </p>
+
         </div>
-        <p style="text-align:center;margin-top:14px;font-size:0.7rem;color:var(--mid);">
-          Problemi con il calendario?
-          <a href="https://calendar.app.google/KUPr3DRowDC96Dma9" target="_blank" rel="noopener"
-             style="color:var(--brass);font-weight:600;text-decoration:none;">
-            Apri in una nuova finestra →
-          </a>
-        </p>
       </div>
 
       <!-- Right: Request form -->
@@ -692,5 +694,23 @@
   const today = new Date().toISOString().split('T')[0];
   document.querySelectorAll('input[type="date"]').forEach(input => { input.min = today; });
 </script>
+
+  <!-- Google Calendar Appointment Scheduling -->
+  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+  <script>
+  (function() {
+    window.addEventListener('load', function() {
+      if (typeof calendar !== 'undefined' && calendar.schedulingButton) {
+        calendar.schedulingButton.load({
+          url: 'https://calendar.google.com/calendar/appointments/AcZssZ1XGtmlgVELuTMg2GFw94CIfHGUtkilUT_sxaU=?gv=true',
+          color: '#09212C',
+          label: 'Prenota ora',
+          target: document.getElementById('gcal-btn-target'),
+        });
+      }
+    });
+  })();
+  </script>
+
 </body>
 </html>

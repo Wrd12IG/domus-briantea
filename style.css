@@ -1043,3 +1043,69 @@ section { padding: 100px 0; }
   font-size: 0.65rem; color: rgba(255,255,255,0.22);
   text-align: center; margin-top: 14px; line-height: 1.6;
 }
+
+/* ─── BOOKING CARD (Google Calendar Scheduling Button) ─── */
+.cal-booking-card {
+  background: white;
+  border-top: 3px solid var(--brass);
+  box-shadow: 0 4px 40px rgba(9,33,44,0.08);
+  padding: 56px 52px 48px;
+  display: flex; flex-direction: column;
+  min-height: 480px;
+}
+.cal-booking-eyebrow {
+  font-size: 0.63rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--brass); margin-bottom: 18px;
+}
+.cal-booking-title {
+  font-family: var(--font-serif); font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 300; color: var(--navy); line-height: 1.08;
+  margin-bottom: 20px;
+}
+.cal-booking-title em { font-style: italic; color: var(--sage); }
+.cal-booking-desc {
+  font-size: 0.87rem; color: var(--mid); line-height: 1.8;
+  max-width: 480px; margin-bottom: 36px;
+  padding-bottom: 32px; border-bottom: 1px solid var(--light-border);
+}
+.cal-booking-features {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px 24px; margin-bottom: 36px;
+}
+.cal-booking-feat {
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.cal-booking-feat .lucide {
+  width: 16px; height: 16px; color: var(--brass);
+  flex-shrink: 0; margin-top: 2px;
+}
+.cal-booking-feat span {
+  font-size: 0.8rem; color: var(--mid); line-height: 1.4; font-weight: 500;
+}
+.cal-booking-divider {
+  height: 1px; background: var(--light-border); margin-bottom: 36px;
+}
+.cal-gcal-btn-wrapper { margin-bottom: 28px; }
+
+/* Override Google Calendar button to match brand */
+#gcal-btn-target .gc-button,
+.gc-button {
+  background-color: var(--sage) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.72rem !important; letter-spacing: 0.12em !important;
+  font-weight: 600 !important; text-transform: uppercase !important;
+  padding: 14px 32px !important;
+  border-radius: 0 !important;
+  transition: background 0.3s !important;
+}
+.gc-button:hover { background-color: var(--sage-light) !important; }
+
+.cal-booking-note {
+  font-size: 0.72rem; color: var(--mid); line-height: 1.7;
+  margin-top: auto; padding-top: 20px;
+  border-top: 1px solid var(--light-border);
+}
+.cal-booking-note a {
+  color: var(--brass); text-decoration: none; font-weight: 600;
+}
+.cal-booking-note a:hover { text-decoration: underline; }
