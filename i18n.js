@@ -258,7 +258,7 @@ function dbApplyLang(lang) {
   });
   // html lang + active button
   document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => {
+  document.querySelectorAll('.nav-lang .lang-btn, .hero-lang .lang-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.lang === lang);
   });
   localStorage.setItem('db_lang', lang);

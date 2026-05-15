@@ -74,7 +74,7 @@ body {
 }
 #nav.scrolled .nav-logo { color: var(--charcoal); }
 .nav-links {
-  display: flex; align-items: center; gap: 36px;
+  display: flex; align-items: center; gap: 24px;
   list-style: none;
 }
 .nav-links a {
@@ -119,6 +119,36 @@ body {
   .nav-links.open a { color: var(--mid) !important; font-size: 0.85rem; }
 }
 
+
+/* ─── LANGUAGE SWITCHER — inside nav ─── */
+.nav-lang {
+  display: flex; align-items: center; gap: 4px;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(255,255,255,0.2);
+}
+#nav.scrolled .nav-lang { border-left-color: var(--light-border); }
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.65rem;
+  font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  padding: 4px 6px;
+  transition: color var(--transition);
+  border-radius: 2px;
+  line-height: 1;
+}
+#nav.scrolled .lang-btn { color: var(--mid); }
+.lang-btn:hover { color: var(--brass) !important; }
+.lang-btn.active { color: white !important; }
+#nav.scrolled .lang-btn.active { color: var(--sage) !important; }
+
+/* Hide lang in nav on mobile — use hamburger menu */
+@media (max-width: 900px) {
+  .nav-lang { display: none; }
+}
+
 /* ─── HERO ─── */
 #hero {
   position: relative;
@@ -147,16 +177,8 @@ body {
   animation: fadeUp 1s 0.6s ease forwards;
 }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-.hero-lang {
-  position: absolute; top: 100px; right: 60px; z-index: 2;
-  display: flex; gap: 16px;
-}
-.hero-lang a {
-  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.6);
-  text-decoration: none; transition: color var(--transition);
-}
-.hero-lang a:hover, .hero-lang a.active { color: white; }
+/* hero-lang removed from hero — now inside nav */
+.hero-lang { display: none; }
 .hero-eyebrow {
   font-family: var(--font-sans); font-size: 0.68rem;
   font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
@@ -1265,4 +1287,24 @@ input, select, textarea, button {
 @media (max-width: 480px) {
   .hero-lang { top: 16px; right: 16px; gap: 4px; }
   .lang-btn  { font-size: 0.58rem; padding: 4px 7px; }
+}
+
+/* ─── iOS NO-ZOOM INPUT FIX ─── */
+input[type="text"], input[type="email"], input[type="tel"],
+input[type="date"], input[type="search"], select, textarea {
+  font-size: 16px !important;
+}
+@media (min-width: 769px) {
+  input[type="text"], input[type="email"], input[type="tel"],
+  input[type="date"], select, textarea {
+    font-size: inherit !important;
+  }
+}
+
+/* ─── NAV OVERFLOW GUARD ─── */
+#nav {
+  overflow: visible;
+}
+#nav .nav-links {
+  overflow: hidden;
 }
