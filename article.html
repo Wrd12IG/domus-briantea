@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domus Briantea Magazine</title>
+  <meta name="description" content="Guide, itinerari e consigli per visitare la Brianza, Milano e i Laghi." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="articles.js"></script>
+  <script src="i18n.js" defer></script>
+  <style>
+    .article-hero {
+      background: var(--navy);
+      padding: 160px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(184,153,104,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .article-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    .article-cat {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .article-meta {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+    .article-img-wrap {
+      max-width: 1000px;
+      margin: -40px auto 60px;
+      position: relative;
+      z-index: 10;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+    }
+    .article-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-bottom: 120px;
+    }
+    .article-body p {
+      margin-bottom: 24px;
+      font-size: 1.12rem;
+      line-height: 1.8;
+      color: var(--charcoal);
+    }
+    .article-body h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin: 56px 0 24px;
+      line-height: 1.2;
+    }
+    .article-body ul {
+      margin-bottom: 32px;
+      padding-left: 20px;
+    }
+    .article-body li {
+      margin-bottom: 12px;
+      font-size: 1.12rem;
+      line-height: 1.8;
+      color: var(--charcoal);
+    }
+    .article-body li strong {
+      font-weight: 600;
+      color: var(--sage);
+    }
+    .article-body strong {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    
+    .error-msg {
+      padding: 180px 20px 100px;
+      text-align: center;
+      min-height: 60vh;
+    }
+    .error-msg h1 {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+    .error-msg p {
+      color: var(--mid);
+      margin-bottom: 32px;
+    }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--sage);
+      text-decoration: none; border-bottom: 1px solid var(--sage);
+      padding-bottom: 4px;
+      transition: color var(--transition), border-color var(--transition), gap var(--transition);
+    }
+    .btn-back:hover { color: var(--brass); border-color: var(--brass); gap: 14px; }
+  </style>
+</head>
+<body>
+
+<nav id="nav" role="navigation" aria-label="Navigazione principale">
+  <a href="index.html" class="nav-logo" id="nav-logo">Domus Briantea</a>
+  <ul class="nav-links" id="nav-links" role="list">
+    <li><a href="index.html#apartments">Le Dimore</a></li>
+    <li><a href="destinazioni.html">Destinazioni</a></li>
+    <li><a href="per-lavoro.html">Per chi viaggia</a></li>
+    <li><a href="magazine.html" style="color:var(--brass)">Magazine</a></li>
+    <li><a href="chi-siamo.html">Chi siamo</a></li>
+    <li><a href="index.html#disponibilita" class="nav-cta" id="nav-book-btn">Prenota</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main id="main-content">
+  <!-- Error State -->
+  <div id="error-state" class="error-msg" style="display: none;">
+    <h1>Articolo non trovato</h1>
+    <p>L'articolo che stai cercando non esiste o è stato rimosso.</p>
+    <a href="magazine.html" class="btn-back">← Torna al Magazine</a>
+  </div>
+
+  <!-- Article State -->
+  <article id="article-state" style="display: none;">
+    <div class="article-hero reveal">
+      <div class="container">
+        <span class="article-cat" id="art-cat"></span>
+        <h1 class="article-title" id="art-title"></h1>
+        <div class="article-meta" id="art-date"></div>
+      </div>
+    </div>
+    
+    <div class="container reveal">
+      <div class="article-img-wrap">
+        <img id="art-img" src="" alt="" />
+      </div>
+      <div class="article-body" id="art-body"></div>
+      
+      <div style="text-align: center; margin-bottom: 80px;">
+        <a href="magazine.html" class="btn-back">← Torna al Magazine</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">Domus Briantea</span>
+        <p>Boutique short stays nel cuore della Brianza. A 20 minuti da Milano, Como, Monza e Lecco.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Dimore</p>
+        <ul class="footer-links">
+          <li><a href="dimore.html">Tutte le dimore</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Per chi viaggia</p>
+        <ul class="footer-links">
+          <li><a href="per-lavoro.html">Per Lavoro</a></li>
+          <li><a href="per-cure-mediche.html">Cure Mediche</a></li>
+          <li><a href="per-eventi.html">Sport & Eventi</a></li>
+          <li><a href="per-turismo.html">Turismo</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contatti</p>
+        <ul class="footer-links">
+          <li><a href="mailto:info@domusbriantea.it">info@domusbriantea.it</a></li>
+          <li><a href="tel:+390362000000">+39 0362 000 000</a></li>
+          <li><a href="chi-siamo.html">Chi siamo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Domus Briantea</p>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="termini.html">Termini di Servizio</a>
+        <a href="cookie.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Logic for article loading
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const article = DB_ARTICLES.find(a => a.id === id);
+
+    if (!article) {
+      document.getElementById('error-state').style.display = 'block';
+    } else {
+      document.getElementById('article-state').style.display = 'block';
+      
+      const lang = localStorage.getItem('db_lang') || 'it';
+      
+      document.title = (article.title[lang] || article.title.it) + ' — Domus Briantea';
+      
+      document.getElementById('art-cat').textContent = article.category[lang] || article.category.it;
+      document.getElementById('art-title').textContent = article.title[lang] || article.title.it;
+      
+      const d = new Date(article.date);
+      document.getElementById('art-date').textContent = d.toLocaleDateString(lang === 'it' ? 'it-IT' : lang === 'de' ? 'de-DE' : lang === 'fr' ? 'fr-FR' : lang === 'es' ? 'es-ES' : lang === 'pt' ? 'pt-PT' : 'en-GB', { day:'numeric', month:'long', year:'numeric' });
+      
+      const img = document.getElementById('art-img');
+      img.src = article.image;
+      img.alt = article.imageAlt[lang] || article.imageAlt.it;
+      
+      document.getElementById('art-body').innerHTML = article.body[lang] || article.body.it;
+    }
+
+    // Scroll reveal manually for article load
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 150);
+      });
+    }, 100);
+  });
+</script>
+
+</body>
+</html>

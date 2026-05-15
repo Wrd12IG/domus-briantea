@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magazine — Domus Briantea</title>
+  <meta name="description" content="Guide, itinerari e consigli per visitare Milano, Como, Monza e Lecco dalla Brianza. Il magazine di Domus Briantea." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="articles.js"></script>
+  <script src="i18n.js" defer></script>
+  <style>
+    .mag-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d2e3d 100%);
+      padding: 140px 0 80px;
+      text-align: center;
+    }
+    .mag-hero .tag { margin-bottom: 16px; }
+    .mag-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .mag-hero h1 em { color: var(--brass); font-style: normal; }
+    .mag-hero p {
+      color: rgba(248,242,230,0.65);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .mag-filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 0 0;
+    }
+    .mag-filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1px solid rgba(248,242,230,0.2);
+      background: transparent;
+      color: var(--cream);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .mag-filter-btn:hover,
+    .mag-filter-btn.active {
+      background: var(--brass);
+      border-color: var(--brass);
+      color: var(--navy);
+    }
+    .mag-grid-section { padding: 80px 0 100px; }
+    .mag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 32px;
+    }
+    .mag-card {
+      background: rgba(248,242,230,0.03);
+      border: 1px solid rgba(248,242,230,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .mag-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+    .mag-card-img {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+    .mag-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .mag-card:hover .mag-card-img img { transform: scale(1.05); }
+    .mag-card-body { padding: 24px; }
+    .mag-card-cat {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin: 0 0 10px;
+    }
+    .mag-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin: 0 0 10px;
+      line-height: 1.4;
+    }
+    .mag-card-excerpt {
+      font-size: 0.85rem;
+      color: rgba(248,242,230,0.55);
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+    .mag-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mag-card-date {
+      font-size: 0.72rem;
+      color: rgba(248,242,230,0.35);
+      letter-spacing: 0.05em;
+    }
+    .mag-card-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(248,242,230,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brass);
+      transition: all 0.25s;
+    }
+    .mag-card:hover .mag-card-arrow {
+      background: var(--brass);
+      color: var(--navy);
+      border-color: var(--brass);
+    }
+    .mag-card-arrow svg { width: 14px; height: 14px; }
+    .mag-empty {
+      text-align: center;
+      padding: 60px 0;
+      color: rgba(248,242,230,0.4);
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .mag-grid { grid-template-columns: 1fr; }
+      .mag-hero { padding: 120px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav" role="navigation" aria-label="Navigazione principale">
+  <a href="index.html" class="nav-logo" id="nav-logo">Domus Briantea</a>
+  <ul class="nav-links" id="nav-links" role="list">
+    <li><a href="index.html#apartments">Le Dimore</a></li>
+    <li><a href="destinazioni.html">Destinazioni</a></li>
+    <li><a href="per-lavoro.html">Per chi viaggia</a></li>
+    <li><a href="magazine.html" style="color:var(--brass)">Magazine</a></li>
+    <li><a href="chi-siamo.html">Chi siamo</a></li>
+    <li><a href="index.html#disponibilita" class="nav-cta" id="nav-book-btn">Prenota</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="mag-hero">
+  <div class="container">
+    <span class="tag">Magazine</span>
+    <h1>Guide, itinerari e consigli<br><em>dalla Brianza</em></h1>
+    <p>Tutto quello che devi sapere per esplorare Milano, Como, Monza e Lecco con intelligenza.</p>
+    <div class="mag-filters" id="mag-filters">
+      <button class="mag-filter-btn active" data-cat="all" onclick="filterArticles('all', this)">Tutti</button>
+    </div>
+  </div>
+</section>
+
+<!-- GRID -->
+<section class="mag-grid-section">
+  <div class="container">
+    <div class="mag-grid" id="mag-grid"></div>
+    <div class="mag-empty" id="mag-empty">Nessun articolo trovato.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">Domus Briantea</span>
+        <p>Boutique short stays nel cuore della Brianza.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Dimore</p>
+        <ul class="footer-links">
+          <li><a href="dimore.html">Tutte le dimore</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Per chi viaggia</p>
+        <ul class="footer-links">
+          <li><a href="per-lavoro.html">Per Lavoro</a></li>
+          <li><a href="per-turismo.html">Turismo</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contatti</p>
+        <ul class="footer-links">
+          <li><a href="mailto:info@domusbriantea.it">info@domusbriantea.it</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Domus Briantea</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Lang
+  const lang = localStorage.getItem('db_lang') || 'it';
+
+  function formatDate(ds) {
+    const d = new Date(ds);
+    return d.toLocaleDateString(lang === 'it' ? 'it-IT' : lang === 'de' ? 'de-DE' : lang === 'fr' ? 'fr-FR' : lang === 'es' ? 'es-ES' : lang === 'pt' ? 'pt-PT' : 'en-GB', { day:'numeric', month:'long', year:'numeric' });
+  }
+
+  // Build category filters
+  const cats = new Set(['all']);
+  DB_ARTICLES.forEach(a => cats.add(a.category[lang] || a.category.it));
+  const filterBar = document.getElementById('mag-filters');
+  filterBar.innerHTML = '';
+  cats.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'mag-filter-btn' + (c === 'all' ? ' active' : '');
+    btn.dataset.cat = c;
+    btn.textContent = c === 'all' ? (lang === 'it' ? 'Tutti' : lang === 'de' ? 'Alle' : lang === 'fr' ? 'Tous' : lang === 'es' ? 'Todos' : lang === 'pt' ? 'Todos' : 'All') : c;
+    btn.onclick = function() { filterArticles(c, this); };
+    filterBar.appendChild(btn);
+  });
+
+  let currentCat = 'all';
+
+  function filterArticles(cat, btn) {
+    currentCat = cat;
+    document.querySelectorAll('.mag-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid(cat);
+  }
+
+  function renderGrid(cat) {
+    const grid = document.getElementById('mag-grid');
+    const empty = document.getElementById('mag-empty');
+    const filtered = DB_ARTICLES.filter(a => cat === 'all' || (a.category[lang] || a.category.it) === cat);
+    grid.innerHTML = '';
+    if (!filtered.length) { empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    filtered.forEach((a, i) => {
+      const card = document.createElement('a');
+      card.href = `article.html?id=${a.id}`;
+      card.className = 'mag-card reveal';
+      card.setAttribute('aria-label', a.title[lang] || a.title.it);
+      card.innerHTML = `
+        <div class="mag-card-img">
+          <img src="${a.image}" alt="${a.imageAlt[lang] || a.imageAlt.it}" loading="lazy" />
+        </div>
+        <div class="mag-card-body">
+          <p class="mag-card-cat">${a.category[lang] || a.category.it}</p>
+          <h2 class="mag-card-title">${a.title[lang] || a.title.it}</h2>
+          <p class="mag-card-excerpt">${a.excerpt[lang] || a.excerpt.it}</p>
+          <div class="mag-card-footer">
+            <span class="mag-card-date">${formatDate(a.date)}</span>
+            <span class="mag-card-arrow"><i data-lucide="arrow-right"></i></span>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+      setTimeout(() => card.classList.add('visible'), i * 80);
+    });
+    lucide.createIcons();
+  }
+
+  renderGrid('all');
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
