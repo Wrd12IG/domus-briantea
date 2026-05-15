@@ -720,161 +720,153 @@
   </script>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       DOMUS BRIANTEA — CUSTOM AVAILABILITY CALENDAR
-       ───────────────────────────────────────────────────────────────────────
-       COME GESTIRE LE DISPONIBILITÀ:
-       Aggiungi i periodi OCCUPATI nell'array OCCUPIED_RANGES qui sotto.
-       Formato: ['YYYY-MM-DD', 'YYYY-MM-DD']  (da → a, estremi inclusi)
-
-       Esempio:
-         ['2025-06-01', '2025-06-07'],    // Aurelia: settimana 1–7 giugno
-         ['2025-07-15', '2025-07-22'],    // Selva: 15–22 luglio
-  ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- ─── CALENDARIO DISPONIBILITÀ ─── -->
   <script>
-  // ─── PERIODI OCCUPATI — modifica qui ────────────────────────────────────
+  // ─── GOOGLE CALENDAR SYNC ──────────────────────────────────────────────────
+  // SETUP (10 minuti):
+  // 1. console.cloud.google.com → nuovo progetto → "Abilita API"
+  //    → Google Calendar API → Abilita
+  // 2. "Credenziali" → "Crea credenziali" → "Chiave API" → copia
+  // 3. Restringe la chiave a: calendar.googleapis.com
+  // 4. Google Calendar → impostazioni calendario roberto@wrdigital.it
+  //    → "Autorizzazioni accesso" → spunta "Rendi pubblico"
+  // 5. Sostituisci YOUR_API_KEY sotto
+  const GCAL_API_KEY = 'YOUR_API_KEY';
+  const GCAL_ID      = 'roberto@wrdigital.it';
+
+  // FALLBACK: periodi occupati hardcoded (usati se API non configurata)
   const OCCUPIED_RANGES = [
     // ['2025-06-01', '2025-06-07'],
-    // ['2025-07-15', '2025-07-22'],
   ];
-  // ────────────────────────────────────────────────────────────────────────
+  // ──────────────────────────────────────────────────────────────────────────
+
+  async function fetchGCalEvents() {
+    if (GCAL_API_KEY === 'YOUR_API_KEY') return null;
+    const now  = new Date();
+    const tMin = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    const tMax = new Date(now.getFullYear() + 1, now.getMonth() + 1, 1).toISOString();
+    const url  = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&timeMin=${tMin}&timeMax=${tMax}&singleEvents=true&orderBy=startTime&maxResults=250`;
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      return (d.items || [])
+        .filter(e => e.status !== 'cancelled')
+        .map(e => {
+          if (e.start?.date) {
+            const end = new Date(e.end.date);
+            end.setDate(end.getDate() - 1);
+            return [e.start.date, end.toISOString().slice(0,10)];
+          }
+          return [e.start.dateTime.slice(0,10), e.end.dateTime.slice(0,10)];
+        });
+    } catch(err) { console.warn('GCal fetch failed:', err); return null; }
+  }
 
   (function() {
-    const MONTHS_IT = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
-                       'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
-    const DAYS_IT   = ['Lu','Ma','Me','Gi','Ve','Sa','Do'];
+    const MONTHS = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
+                    'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+    const DAYS   = ['Lu','Ma','Me','Gi','Ve','Sa','Do'];
 
     function expandRanges(ranges) {
       const s = new Set();
-      ranges.forEach(([a, b]) => {
-        let d = new Date(a + 'T00:00:00');
-        const e = new Date(b + 'T00:00:00');
+      (ranges || []).forEach(([a,b]) => {
+        let d = new Date(a + 'T00:00:00'), e = new Date(b + 'T00:00:00');
         while (d <= e) { s.add(d.toISOString().slice(0,10)); d.setDate(d.getDate()+1); }
       });
       return s;
     }
 
-    let occupied   = expandRanges(OCCUPIED_RANGES);
-    let selStart   = null, selEnd = null, hover = null;
-    const today    = new Date(); today.setHours(0,0,0,0);
-    let vYear      = today.getFullYear();
-    let vMonth     = today.getMonth();
+    let occupied = expandRanges(OCCUPIED_RANGES);
+    let selStart = null, selEnd = null, hover = null;
+    const today  = new Date(); today.setHours(0,0,0,0);
+    let vYear = today.getFullYear(), vMonth = today.getMonth();
 
-    function fmt(dateStr) {
-      if (!dateStr) return '—';
-      const [y,m,d] = dateStr.split('-');
-      return d + ' ' + MONTHS_IT[+m-1].slice(0,3) + ' ' + y;
+    function fmt(ds) {
+      if (!ds) return '—';
+      const [y,m,d] = ds.split('-');
+      return d + ' ' + MONTHS[+m-1].slice(0,3) + ' ' + y;
     }
 
-    function nightsBetween(a, b) {
-      if (!a || !b) return 0;
-      return Math.round((new Date(b) - new Date(a)) / 86400000);
-    }
-
-    function hasOccupiedBetween(a, b) {
+    function hasOccupied(a, b) {
       let d = new Date(a + 'T00:00:00'); d.setDate(d.getDate()+1);
       const e = new Date(b + 'T00:00:00');
-      while (d < e) {
-        if (occupied.has(d.toISOString().slice(0,10))) return true;
-        d.setDate(d.getDate()+1);
-      }
+      while (d < e) { if (occupied.has(d.toISOString().slice(0,10))) return true; d.setDate(d.getDate()+1); }
       return false;
     }
 
-    function updateSummary() {
+    function updateUI() {
       const s = document.getElementById('cal-sel-start');
       const e = document.getElementById('cal-sel-end');
       const n = document.getElementById('cal-sel-nights');
       const bar = document.getElementById('cal-selection-bar');
       if (s) s.textContent = fmt(selStart);
       if (e) e.textContent = fmt(selEnd);
-      const nights = nightsBetween(selStart, selEnd);
-      if (n) n.textContent = nights > 0 ? nights + (nights === 1 ? ' notte' : ' notti') : '';
+      const nights = selStart && selEnd
+        ? Math.round((new Date(selEnd) - new Date(selStart)) / 86400000) : 0;
+      if (n) n.textContent = nights > 0 ? nights + (nights===1?' notte':' notti') : '';
       if (bar) bar.classList.toggle('cal-selection-bar--active', !!(selStart || selEnd));
-      // Update form hidden inputs
       const ci = document.getElementById('br-checkin');
       const co = document.getElementById('br-checkout');
       if (ci) ci.value = selStart || '';
       if (co) co.value = selEnd   || '';
     }
 
-    function selectDate(dateStr) {
-      if (!selStart || (selStart && selEnd)) {
-        selStart = dateStr; selEnd = null;
-      } else {
-        if (dateStr <= selStart) { selStart = dateStr; selEnd = null; }
-        else if (hasOccupiedBetween(selStart, dateStr)) { selStart = dateStr; selEnd = null; }
-        else { selEnd = dateStr; }
-      }
+    function selectDate(ds) {
+      if (!selStart || (selStart && selEnd)) { selStart = ds; selEnd = null; }
+      else if (ds <= selStart)               { selStart = ds; selEnd = null; }
+      else if (hasOccupied(selStart, ds))    { selStart = ds; selEnd = null; }
+      else                                   { selEnd = ds; }
       hover = null;
-      updateSummary();
-      render();
+      updateUI(); render();
     }
 
     function renderMonth(year, month) {
-      const wrap = document.createElement('div');
-      wrap.className = 'cal-month';
-
-      // Header
-      const hdr = document.createElement('div');
-      hdr.className = 'cal-month-header';
-      hdr.innerHTML = '<span class="cal-month-name">' + MONTHS_IT[month] +
+      const wrap  = document.createElement('div'); wrap.className = 'cal-month';
+      const hdr   = document.createElement('div'); hdr.className = 'cal-month-header';
+      hdr.innerHTML = '<span class="cal-month-name">' + MONTHS[month] +
                       ' <em>' + year + '</em></span>';
       wrap.appendChild(hdr);
-
-      // Day labels
-      const lbls = document.createElement('div');
-      lbls.className = 'cal-day-labels';
-      DAYS_IT.forEach(d => { const s=document.createElement('span'); s.textContent=d; lbls.appendChild(s); });
+      const lbls  = document.createElement('div'); lbls.className = 'cal-day-labels';
+      DAYS.forEach(d => { const s=document.createElement('span'); s.textContent=d; lbls.appendChild(s); });
       wrap.appendChild(lbls);
-
-      // Grid
-      const grid = document.createElement('div');
-      grid.className = 'cal-days-grid';
-
-      const firstDay = new Date(year, month, 1).getDay();
-      const offset   = firstDay === 0 ? 6 : firstDay - 1;
-      const total    = new Date(year, month+1, 0).getDate();
-
-      for (let i=0; i<offset; i++) {
-        const e = document.createElement('div'); e.className='cal-day cal-day--empty'; grid.appendChild(e);
-      }
-
+      const grid  = document.createElement('div'); grid.className = 'cal-days-grid';
+      const first = new Date(year, month, 1).getDay();
+      const off   = first === 0 ? 6 : first - 1;
+      const total = new Date(year, month+1, 0).getDate();
+      for (let i=0; i<off; i++) { const e=document.createElement('div'); e.className='cal-day cal-day--empty'; grid.appendChild(e); }
       for (let d=1; d<=total; d++) {
-        const date    = new Date(year, month, d);
-        const ds      = date.toISOString().slice(0,10);
-        const isPast  = date < today;
-        const isOcc   = occupied.has(ds);
+        const date = new Date(year, month, d);
+        const ds   = date.toISOString().slice(0,10);
+        const isPast= date < today;
+        const isOcc = occupied.has(ds);
         const isToday = date.getTime() === today.getTime();
-        const isStart = selStart === ds;
-        const isEnd   = selEnd   === ds;
-        const inRange = selStart && selEnd && ds > selStart && ds < selEnd;
-        const inHover = selStart && !selEnd && hover && ds > selStart && ds <= hover;
-
-        const btn = document.createElement('button');
-        btn.type = 'button'; btn.textContent = d; btn.dataset.date = ds;
-        const cls = ['cal-day'];
-        if (isPast)   cls.push('cal-day--past');
-        if (isOcc)    cls.push('cal-day--occupied');
-        if (isToday)  cls.push('cal-day--today');
-        if (isStart)  cls.push('cal-day--start');
-        if (isEnd)    cls.push('cal-day--end');
-        if (inRange)  cls.push('cal-day--in-range');
-        if (inHover)  cls.push('cal-day--hover-range');
-        btn.className = cls.join(' ');
-
-        if (!isPast && !isOcc) {
-          btn.addEventListener('click',      () => selectDate(ds));
-          btn.addEventListener('mouseenter', () => { hover = ds; render(); });
-          btn.addEventListener('mouseleave', () => { hover = null; render(); });
+        const btn   = document.createElement('button');
+        btn.type='button'; btn.textContent=d; btn.dataset.date=ds;
+        const cls=['cal-day'];
+        if (isPast) cls.push('cal-day--past');
+        if (isOcc)  cls.push('cal-day--occupied');
+        if (isToday)cls.push('cal-day--today');
+        if (selStart===ds) cls.push('cal-day--start');
+        if (selEnd===ds)   cls.push('cal-day--end');
+        if (selStart&&selEnd&&ds>selStart&&ds<selEnd) cls.push('cal-day--in-range');
+        if (selStart&&!selEnd&&hover&&ds>selStart&&ds<=hover) cls.push('cal-day--hover-range');
+        btn.className=cls.join(' ');
+        if (!isPast&&!isOcc) {
+          btn.addEventListener('click',      ()=>selectDate(ds));
+          btn.addEventListener('mouseenter', ()=>{hover=ds;render();});
+          btn.addEventListener('mouseleave', ()=>{hover=null;render();});
           btn.setAttribute('aria-label', ds);
-        } else {
-          btn.disabled = true;
-        }
+        } else btn.disabled=true;
         grid.appendChild(btn);
       }
-      wrap.appendChild(grid);
-      return wrap;
+      wrap.appendChild(grid); return wrap;
+    }
+
+    function setLoading(on) {
+      const c = document.getElementById('luxury-calendar');
+      if (!c) return;
+      if (on) c.innerHTML = '<div class="cal-loading"><span>Aggiornamento disponibilità…</span></div>';
     }
 
     function render() {
@@ -882,21 +874,21 @@
       if (!c) return;
       c.innerHTML = '';
       for (let i=0; i<2; i++) {
-        const m = (vMonth + i) % 12;
-        const y = vYear + Math.floor((vMonth + i) / 12);
-        c.appendChild(renderMonth(y, m));
+        const m = (vMonth+i)%12, y = vYear + Math.floor((vMonth+i)/12);
+        c.appendChild(renderMonth(y,m));
       }
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
-    window.calPrevMonth = function() {
-      vMonth--; if (vMonth < 0) { vMonth=11; vYear--; } render();
-    };
-    window.calNextMonth = function() {
-      vMonth++; if (vMonth > 11) { vMonth=0; vYear++; } render();
-    };
+    window.calPrevMonth = ()=>{ vMonth--; if(vMonth<0){vMonth=11;vYear--;} render(); };
+    window.calNextMonth = ()=>{ vMonth++; if(vMonth>11){vMonth=0;vYear++;} render(); };
 
-    window.addEventListener('DOMContentLoaded', function() { render(); updateSummary(); });
+    window.addEventListener('DOMContentLoaded', async function() {
+      setLoading(true);
+      const gcalRanges = await fetchGCalEvents();
+      if (gcalRanges !== null) occupied = expandRanges(gcalRanges);
+      render(); updateUI();
+    });
   })();
   </script>
 </body>

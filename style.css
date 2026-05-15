@@ -1015,9 +1015,9 @@ section { padding: 100px 0; }
   width: 100%; padding: 11px 14px;
   background: rgba(255,255,255,0.04);
   border: 0; border-bottom: 1px solid rgba(255,255,255,0.18);
-  color: white; font-family: var(--font-sans); font-size: 0.84rem;
+  color: white; font-family: var(--font-sans); font-size: 16px;
   outline: none; transition: border-color var(--transition), background var(--transition);
-  -webkit-appearance: none; border-radius: 0;
+  -webkit-appearance: none; border-radius: 0; box-sizing: border-box;
 }
 .cal-field input:focus,
 .cal-field select:focus,
@@ -1157,4 +1157,91 @@ section { padding: 100px 0; }
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--brass);
   background: rgba(184,153,104,0.1); padding: 4px 12px;
+}
+
+/* ─── MOBILE UX FIXES ─── */
+
+/* Prevent horizontal scroll / page shift */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; max-width: 100%; }
+* { box-sizing: border-box; }
+
+/* Prevent iOS auto-zoom on input focus (requires font-size >= 16px) */
+input, select, textarea, button {
+  font-size: 16px !important;
+  -webkit-text-size-adjust: 100%;
+}
+/* Allow button labels to be smaller visually via transform if needed */
+.cal-submit { font-size: 16px !important; letter-spacing: 0.1em; }
+.nav-cta   { font-size: 16px !important; }
+
+/* Remove sticky form on mobile (virtual keyboard causes layout jumps) */
+@media (max-width: 960px) {
+  .cal-form-panel {
+    position: relative !important;
+    top: auto !important;
+    min-height: auto;
+  }
+  .cal-layout {
+    display: block;
+  }
+  .cal-main {
+    padding: 32px 0 0;
+  }
+}
+
+/* Calendar: one month on mobile */
+@media (max-width: 700px) {
+  .cal-months-grid {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 12px;
+  }
+  .cal-month:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--light-border);
+    padding: 0 0 20px;
+  }
+  .cal-month:last-child { padding: 20px 0 0; }
+  .cal-custom-toolbar { padding: 14px 16px; }
+  .cal-legend-row     { padding: 12px 16px; gap: 12px; }
+  .cal-selection-bar  { padding: 14px 16px; flex-wrap: wrap; gap: 12px; }
+}
+
+/* Hero section: prevent overflow */
+@media (max-width: 768px) {
+  .cal-hero-inner { flex-direction: column; align-items: flex-start; padding-bottom: 32px; }
+  .cal-hero       { padding: 48px 0 0; }
+  .hero-content   { padding: 0 20px; }
+}
+
+/* Navigation: prevent overflow on mobile */
+@media (max-width: 768px) {
+  nav .nav-links { overflow-x: hidden; }
+}
+
+/* General container padding on mobile */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+}
+
+/* Section padding on mobile */
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+  .section-header { margin-bottom: 32px; }
+}
+
+/* Cal loading state */
+.cal-loading {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px; padding: 40px;
+  grid-column: 1 / -1;
+}
+.cal-loading span {
+  font-family: var(--font-serif); font-size: 0.9rem;
+  color: var(--mid); font-style: italic; letter-spacing: 0.04em;
+  animation: pulseOpacity 1.5s ease-in-out infinite;
+}
+@keyframes pulseOpacity {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
 }
