@@ -724,3 +724,28 @@ document.addEventListener('DOMContentLoaded', function() {
   const saved = localStorage.getItem('db_lang') || 'it';
   dbApplyLang(saved);
 });
+
+// Auto-inject mobile language switcher into the hamburger menu
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.getElementById('nav-links');
+  if (navLinks && !document.getElementById('mobile-lang-switcher')) {
+    const langDiv = document.createElement('div');
+    langDiv.id = 'mobile-lang-switcher';
+    langDiv.className = 'nav-lang mobile-only';
+    langDiv.setAttribute('aria-label', 'Selezione lingua');
+    langDiv.innerHTML = `
+      <button class="lang-btn active" data-lang="it" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
+    `;
+    const current = localStorage.getItem('db_lang') || 'it';
+    langDiv.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.remove('active');
+      if(b.dataset.lang === current) b.classList.add('active');
+    });
+    navLinks.appendChild(langDiv);
+  }
+});
