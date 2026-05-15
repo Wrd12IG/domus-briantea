@@ -81,7 +81,19 @@ const DB_TRANSLATIONS = {
     'footer.about':'Chi siamo',
     'footer.privacy':'Privacy Policy',
     'footer.terms':'Termini di Servizio',
-    'footer.cookie':'Cookie Policy'
+        'footer.cookie':'Cookie Policy',
+    'b1.cat':'Sport & Eventi',
+    'b1.title':'GP di Monza: dove dormire vicino all\'Autodromo senza spendere una fortuna',
+    'b1.exc':'Durante il weekend del Gran Premio i prezzi degli hotel triplicano. Ecco perché un appartamento in Brianza è la scelta intelligente.',
+    'b1.date':'12 Maggio 2025',
+    'b2.cat':'Destinazioni',
+    'b2.title':'Come muoversi da Seregno a Milano: treno, auto e navetta a confronto',
+    'b2.exc':'25 minuti di treno o 35 in auto? La guida pratica per raggiungere Milano dalla Brianza senza stress.',
+    'b2.date':'4 Maggio 2025',
+    'b3.cat':'Turismo',
+    'b3.title':'Lago di Como vs Lago di Lecco: quale scegliere per un weekend in Brianza',
+    'b3.exc':'Due laghi, due caratteri. Una guida onesta per scegliere in base al tuo stile di viaggio.',
+    'b3.date':'28 Aprile 2025'
   },
   en: {
     'nav.dimore':'Residences','nav.dest':'Destinations','nav.chi':'For Travellers',
@@ -164,7 +176,19 @@ const DB_TRANSLATIONS = {
     'footer.about':'About us',
     'footer.privacy':'Privacy Policy',
     'footer.terms':'Terms of Service',
-    'footer.cookie':'Cookie Policy'
+        'footer.cookie':'Cookie Policy',
+    'b1.cat':'Sports & Events',
+    'b1.title':'Monza GP: where to sleep near the Circuit without spending a fortune',
+    'b1.exc':'During the Grand Prix weekend, hotel prices triple. Here\'s why an apartment in Brianza is the smart choice.',
+    'b1.date':'May 12, 2025',
+    'b2.cat':'Destinations',
+    'b2.title':'How to get from Seregno to Milan: train, car and shuttle compared',
+    'b2.exc':'25 minutes by train or 35 by car? The practical guide to reaching Milan from Brianza without stress.',
+    'b2.date':'May 4, 2025',
+    'b3.cat':'Tourism',
+    'b3.title':'Lake Como vs Lake Lecco: which to choose for a weekend in Brianza',
+    'b3.exc':'Two lakes, two characters. An honest guide to choose based on your travel style.',
+    'b3.date':'April 28, 2025'
   },
   de: {
     'nav.dimore':'Residenzen','nav.dest':'Ziele','nav.chi':'Für Reisende',
@@ -247,7 +271,19 @@ const DB_TRANSLATIONS = {
     'footer.about':'Über uns',
     'footer.privacy':'Datenschutz',
     'footer.terms':'Nutzungsbedingungen',
-    'footer.cookie':'Cookie-Richtlinie'
+        'footer.cookie':'Cookie-Richtlinie',
+    'b1.cat':'Sport & Events',
+    'b1.title':'Monza GP: Wo man in der Nähe der Rennstrecke schlafen kann, ohne ein Vermögen auszugeben',
+    'b1.exc':'Während des Grand-Prix-Wochenendes verdreifachen sich die Hotelpreise. Warum ein Apartment in der Brianza die intelligente Wahl ist.',
+    'b1.date':'12. Mai 2025',
+    'b2.cat':'Ziele',
+    'b2.title':'Von Seregno nach Mailand: Zug, Auto und Shuttle im Vergleich',
+    'b2.exc':'25 Minuten mit dem Zug oder 35 mit dem Auto? Der praktische Leitfaden, um Mailand aus der Brianza stressfrei zu erreichen.',
+    'b2.date':'4. Mai 2025',
+    'b3.cat':'Tourismus',
+    'b3.title':'Comer See vs. Lecco-See: Welchen für ein Wochenende in der Brianza wählen?',
+    'b3.exc':'Zwei Seen, zwei Charaktere. Ein ehrlicher Ratgeber, um je nach Reisestil zu wählen.',
+    'b3.date':'28. April 2025'
   },
   fr: {
     'nav.dimore':'Résidences','nav.dest':'Destinations','nav.chi':'Pour les Voyageurs',
@@ -330,7 +366,19 @@ const DB_TRANSLATIONS = {
     'footer.about':'À propos',
     'footer.privacy':'Politique de Confidentialité',
     'footer.terms':'Conditions d\'Utilisation',
-    'footer.cookie':'Politique relative aux Cookies'
+        'footer.cookie':'Politique relative aux Cookies',
+    'b1.cat':'Sports et Événements',
+    'b1.title':'GP de Monza : où dormir près du Circuit sans dépenser une fortune',
+    'b1.exc':'Pendant le week-end du Grand Prix, les prix des hôtels triplent. Voici pourquoi un appartement en Brianza est le choix intelligent.',
+    'b1.date':'12 Mai 2025',
+    'b2.cat':'Destinations',
+    'b2.title':'Comment se rendre de Seregno à Milan : train, voiture et navette comparés',
+    'b2.exc':'25 minutes en train ou 35 en voiture ? Le guide pratique pour rejoindre Milan depuis la Brianza sans stress.',
+    'b2.date':'4 Mai 2025',
+    'b3.cat':'Tourisme',
+    'b3.title':'Lac de Côme vs Lac de Lecco : lequel choisir pour un week-end en Brianza',
+    'b3.exc':'Deux lacs, deux caractères. Un guide honnête pour choisir en fonction de votre style de voyage.',
+    'b3.date':'28 Avril 2025'
   },
   es: {
     'nav.dimore':'Residencias','nav.dest':'Destinos','nav.chi':'Para Viajeros',
@@ -413,7 +461,19 @@ const DB_TRANSLATIONS = {
     'footer.about':'Quiénes somos',
     'footer.privacy':'Política de Privacidad',
     'footer.terms':'Términos de Servicio',
-    'footer.cookie':'Política de Cookies'
+        'footer.cookie':'Política de Cookies',
+    'b1.cat':'Deportes y Eventos',
+    'b1.title':'GP de Monza: dónde dormir cerca del Circuito sin gastar una fortuna',
+    'b1.exc':'Durante el fin de semana del Gran Premio, los precios de los hoteles se triplican. Por eso un apartamento en Brianza es la elección inteligente.',
+    'b1.date':'12 de Mayo de 2025',
+    'b2.cat':'Destinos',
+    'b2.title':'Cómo ir de Seregno a Milán: tren, coche y transporte comparados',
+    'b2.exc':'¿25 minutos en tren o 35 en coche? La guía práctica para llegar a Milán desde Brianza sin estrés.',
+    'b2.date':'4 de Mayo de 2025',
+    'b3.cat':'Turismo',
+    'b3.title':'Lago de Como vs Lago de Lecco: cuál elegir para un fin de semana en Brianza',
+    'b3.exc':'Dos lagos, dos personalidades. Una guía honesta para elegir según tu estilo de viaje.',
+    'b3.date':'28 de Abril de 2025'
   },
   pt: {
     'nav.dimore':'Residências','nav.dest':'Destinos','nav.chi':'Para Viajantes',
@@ -496,7 +556,19 @@ const DB_TRANSLATIONS = {
     'footer.about':'Sobre nós',
     'footer.privacy':'Política de Privacidade',
     'footer.terms':'Termos de Serviço',
-    'footer.cookie':'Política de Cookies'
+        'footer.cookie':'Política de Cookies',
+    'b1.cat':'Desporto e Eventos',
+    'b1.title':'GP de Monza: onde dormir perto do Circuito sem gastar uma fortuna',
+    'b1.exc':'Durante o fim de semana do Grande Prémio, os preços dos hotéis triplicam. Eis porque um apartamento na Brianza é a escolha inteligente.',
+    'b1.date':'12 de Maio de 2025',
+    'b2.cat':'Destinos',
+    'b2.title':'Como ir de Seregno a Milão: comboio, carro e vaivém em comparação',
+    'b2.exc':'25 minutos de comboio ou 35 de carro? O guia prático para chegar a Milão a partir da Brianza sem stress.',
+    'b2.date':'4 de Maio de 2025',
+    'b3.cat':'Turismo',
+    'b3.title':'Lago de Como vs Lago de Lecco: qual escolher para um fim de semana na Brianza',
+    'b3.exc':'Dois lagos, duas personalidades. Um guia honesto para escolher com base no seu estilo de viagem.',
+    'b3.date':'28 de Abril de 2025'
   }
 };
 
@@ -522,8 +594,8 @@ const DB_MAP = [
   {s:'.apt-badge',                k:'apts.badge', a:'text'},
   {s:'.apt-price-from',           k:'apts.from',  a:'text'},
   {s:'#cta-aurelia',  k:'apts.cta1', a:'text'},
-  {s:'#cta-selva',    k:'apts.cta2', a:'text'},
-  {s:'#cta-lago',     k:'apts.cta2', a:'text'},
+  {s:'#cta-selva',    k:'apts.cta1', a:'text'},
+  {s:'#cta-lago',     k:'apts.cta1', a:'text'},
   // Calendar hero
   {s:'.cal-eyebrow',    k:'cal.eyebrow', a:'text'},
   {s:'.cal-big-title',  k:'cal.title',   a:'html'},
@@ -579,6 +651,19 @@ const DB_MAP = [
   // Blog
   {s:'#blog .tag',           k:'blog.tag',   a:'text'},
   {s:'#blog .section-title', k:'blog.title', a:'text'},
+  // Blog (articles previews)
+  {s:'#blog-monza .blog-cat', k:'b1.cat', a:'text'},
+  {s:'#blog-monza .blog-title', k:'b1.title', a:'text'},
+  {s:'#blog-monza .blog-excerpt', k:'b1.exc', a:'text'},
+  {s:'#blog-monza .blog-date', k:'b1.date', a:'text'},
+  {s:'#blog-milano .blog-cat', k:'b2.cat', a:'text'},
+  {s:'#blog-milano .blog-title', k:'b2.title', a:'text'},
+  {s:'#blog-milano .blog-excerpt', k:'b2.exc', a:'text'},
+  {s:'#blog-milano .blog-date', k:'b2.date', a:'text'},
+  {s:'#blog-lago .blog-cat', k:'b3.cat', a:'text'},
+  {s:'#blog-lago .blog-title', k:'b3.title', a:'text'},
+  {s:'#blog-lago .blog-excerpt', k:'b3.exc', a:'text'},
+  {s:'#blog-lago .blog-date', k:'b3.date', a:'text'},
   // CTA
   {s:'#contact-cta .tag',           k:'cta.tag',     a:'text'},
   {s:'#contact-cta .section-title', k:'cta.title',   a:'html'},
