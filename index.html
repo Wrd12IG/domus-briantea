@@ -28,6 +28,7 @@
     "amenityFeature": ["WiFi","Parking","Concierge","Air Conditioning"]
   }
   </script>
+  <script src="i18n.js" defer></script>
 </head>
 <body>
 
@@ -52,9 +53,12 @@
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-lang" aria-label="Selezione lingua">
-    <a href="/" class="active">IT</a>
-    <a href="/en/">EN</a>
-    <a href="/de/">DE</a>
+    <button class="lang-btn active" data-lang="it" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
   </div>
   <div class="hero-content">
     <p class="hero-eyebrow">Boutique Short Stays · Brianza, Lombardia</p>

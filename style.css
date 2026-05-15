@@ -1245,3 +1245,24 @@ input, select, textarea, button {
   0%, 100% { opacity: 0.4; }
   50%       { opacity: 1; }
 }
+
+/* ─── LANGUAGE SWITCHER (buttons) ─── */
+.hero-lang {
+  position: absolute; top: 28px; right: 28px;
+  display: flex; gap: 6px; z-index: 20;
+}
+.lang-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.1em; padding: 5px 9px;
+  cursor: pointer; transition: all 0.25s; border-radius: 0;
+  -webkit-appearance: none;
+}
+.lang-btn:hover { background: rgba(255,255,255,0.18); color: white; }
+.lang-btn.active { background: var(--brass); border-color: var(--brass); color: white; }
+@media (max-width: 480px) {
+  .hero-lang { top: 16px; right: 16px; gap: 4px; }
+  .lang-btn  { font-size: 0.58rem; padding: 4px 7px; }
+}
