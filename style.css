@@ -1343,3 +1343,21 @@ input[type="date"], input[type="search"], select, textarea {
     border-color: var(--brass);
   }
 }
+
+/* ─── FOOTER CREDITS ─── */
+.footer-credits {
+  text-align: center;
+  padding: 12px 0 4px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin-top: 8px;
+}
+.footer-credits p {
+  font-size: 0.65rem; color: rgba(255,255,255,0.2);
+  letter-spacing: 0.06em; font-family: var(--font-sans);
+}
+.footer-credits a {
+  color: rgba(255,255,255,0.3); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-credits a:hover { color: var(--brass); }
+.footer-credits sup { font-size: 0.55rem; vertical-align: super; }
